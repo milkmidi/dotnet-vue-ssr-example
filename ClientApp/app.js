@@ -6,8 +6,8 @@ import router from './router';
 const app = new Vue({
   router,
   store,
-  // render:(h)=>h(App)
-  ...App
+  render:(h)=>h(App)
+  // ...App
 });
 
 export { app, router, store };

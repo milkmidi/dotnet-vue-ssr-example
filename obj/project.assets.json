@@ -13258,11 +13258,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\github_ml\\dotnet_example\\dotnet_example.csproj",
+      "projectUniqueName": "D:\\github_milkmidi\\dotnet-vue-ssr-example\\dotnet_example.csproj",
       "projectName": "dotnet_example",
-      "projectPath": "D:\\github_ml\\dotnet_example\\dotnet_example.csproj",
+      "projectPath": "D:\\github_milkmidi\\dotnet-vue-ssr-example\\dotnet_example.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "D:\\github_ml\\dotnet_example\\obj\\",
+      "outputPath": "D:\\github_milkmidi\\dotnet-vue-ssr-example\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -9,3 +9,14 @@ D:\github_ml\dotnet_example\obj\Debug\netcoreapp2.0\dotnet_example.AssemblyInfoI
 D:\github_ml\dotnet_example\obj\Debug\netcoreapp2.0\dotnet_example.AssemblyInfo.cs
 D:\github_ml\dotnet_example\obj\Debug\netcoreapp2.0\dotnet_example.dll
 D:\github_ml\dotnet_example\obj\Debug\netcoreapp2.0\dotnet_example.pdb
+D:\github_milkmidi\dotnet-vue-ssr-example\bin\Debug\netcoreapp2.0\dotnet_example.deps.json
+D:\github_milkmidi\dotnet-vue-ssr-example\bin\Debug\netcoreapp2.0\dotnet_example.runtimeconfig.json
+D:\github_milkmidi\dotnet-vue-ssr-example\bin\Debug\netcoreapp2.0\dotnet_example.runtimeconfig.dev.json
+D:\github_milkmidi\dotnet-vue-ssr-example\bin\Debug\netcoreapp2.0\dotnet_example.dll
+D:\github_milkmidi\dotnet-vue-ssr-example\bin\Debug\netcoreapp2.0\dotnet_example.pdb
+D:\github_milkmidi\dotnet-vue-ssr-example\obj\Debug\netcoreapp2.0\dotnet_example.csprojAssemblyReference.cache
+D:\github_milkmidi\dotnet-vue-ssr-example\obj\Debug\netcoreapp2.0\dotnet_example.csproj.CoreCompileInputs.cache
+D:\github_milkmidi\dotnet-vue-ssr-example\obj\Debug\netcoreapp2.0\dotnet_example.AssemblyInfoInputs.cache
+D:\github_milkmidi\dotnet-vue-ssr-example\obj\Debug\netcoreapp2.0\dotnet_example.AssemblyInfo.cs
+D:\github_milkmidi\dotnet-vue-ssr-example\obj\Debug\netcoreapp2.0\dotnet_example.dll
+D:\github_milkmidi\dotnet-vue-ssr-example\obj\Debug\netcoreapp2.0\dotnet_example.pdb

@@ -10880,7 +10880,8 @@ exports.default = function (context) {
       Promise.all(matchedComponents.map(function (Component) {
         if (Component.asyncData) {
           return Component.asyncData({
-            store: _app.store
+            store: _app.store,
+            route: _app.router.currentRoute
           });
         }
       })).then(function () {
@@ -10903,8 +10904,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.store = exports.router = exports.app = undefined;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _vue = __webpack_require__(13);
 
 var _vue2 = _interopRequireDefault(_vue);
@@ -10923,10 +10922,14 @@ var _router2 = _interopRequireDefault(_router);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var app = new _vue2.default(_extends({
+var app = new _vue2.default({
   router: _router2.default,
-  store: _store2.default
-}, _App2.default));
+  store: _store2.default,
+  render: function render(h) {
+    return h(_App2.default);
+  }
+  // ...App
+});
 
 exports.app = app;
 exports.router = _router2.default;
@@ -10952,7 +10955,7 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "D:\\github_ml\\dotnet_example\\ClientApp\\components\\App.vue"
+__vue_options__.__file = "D:\\github_milkmidi\\dotnet-vue-ssr-example\\ClientApp\\components\\App.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 if (__vue_options__.functional) {console.error("[vue-loader] App.vue: functional components are not supported and should be defined in plain js files using render functions.")}
@@ -10969,7 +10972,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "app"
     }
-  }, [_c('h1', [_vm._v("Testing123456")]), _vm._v(" "), _c('router-link', {
+  }, [_c('h1', [_vm._v("App")]), _vm._v(" "), _c('router-link', {
     staticClass: "router-link-item",
     attrs: {
       "to": "/"
@@ -11012,7 +11015,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _vue2.default.use(_vuex2.default);
 
 var store = new _vuex2.default.Store({
-  state: { messages: [], lastFetchedMessageDate: -1 },
+  state: {
+    messages: [],
+    lastFetchedMessageDate: -1
+  },
 
   mutations: {
     INITIAL_MESSAGES: function INITIAL_MESSAGES(state, payload) {
@@ -11063,7 +11069,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var fetchInitialMessages = exports.fetchInitialMessages = function fetchInitialMessages(_ref) {
   var commit = _ref.commit;
 
-  return _axios2.default.get('/initialMessages').then(function (response) {
+  // axios issus ? , need full-URI
+  return _axios2.default.get('http://localhost:5000/api/initialMessages').then(function (response) {
     commit("INITIAL_MESSAGES", response.data);
   }).catch(function (err) {
     console.log(err);
@@ -11073,7 +11080,7 @@ var fetchInitialMessages = exports.fetchInitialMessages = function fetchInitialM
 var fetchMessages = exports.fetchMessages = function fetchMessages(_ref2, lastFetchedMessageDate) {
   var commit = _ref2.commit;
 
-  _axios2.default.get('/fetchMessages?lastFetchedMessageDate=' + lastFetchedMessageDate).then(function (response) {
+  _axios2.default.get('/api/fetchMessages?lastFetchedMessageDate=' + lastFetchedMessageDate).then(function (response) {
     commit("FETCH_MESSAGES", response.data);
   }).catch(function (err) {
     console.log(err);
@@ -12938,7 +12945,7 @@ module.exports = require("zlib");
 /* 79 */
 /***/ (function(module, exports) {
 
-module.exports = {"_from":"axios@^0.14.0","_id":"axios@0.14.0","_inBundle":false,"_integrity":"sha1-QPJPL06RO5+qQ9OnsuQKuHKa+pA=","_location":"/axios","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"axios@^0.14.0","name":"axios","escapedName":"axios","rawSpec":"^0.14.0","saveSpec":null,"fetchSpec":"^0.14.0"},"_requiredBy":["/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.14.0.tgz","_shasum":"40f24f2f4e913b9faa43d3a7b2e40ab8729afa90","_spec":"axios@^0.14.0","_where":"D:\\github_ml\\dotnet_example","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/mzabriskie/axios/issues"},"bundleDependencies":false,"dependencies":{"follow-redirects":"0.0.7"},"deprecated":false,"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^2.11.9","es6-promise":"^3.2.1","grunt":"0.4.5","grunt-banner":"0.6.0","grunt-cli":"0.1.13","grunt-contrib-clean":"1.0.0","grunt-contrib-nodeunit":"1.0.0","grunt-contrib-watch":"0.6.1","grunt-eslint":"18.0.0","grunt-karma":"0.12.1","grunt-ts":"5.3.2","grunt-typings":"0.1.5","grunt-webpack":"1.0.11","istanbul-instrumenter-loader":"^0.2.0","jasmine-core":"^2.4.1","karma":"^0.13.22","karma-chrome-launcher":"^1.0.1","karma-coverage":"^1.0.0","karma-firefox-launcher":"^1.0.0","karma-jasmine":"^1.0.2","karma-jasmine-ajax":"^0.1.13","karma-opera-launcher":"^1.0.0","karma-phantomjs-launcher":"^1.0.0","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^1.0.0","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.7","karma-webpack":"^1.7.0","load-grunt-tasks":"3.4.1","minimist":"^1.2.0","phantomjs-prebuilt":"^2.1.7","sinon":"^1.17.4","url-search-params":"^0.5.0","webpack":"^1.13.1","webpack-dev-server":"^1.14.1"},"homepage":"https://github.com/mzabriskie/axios","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/mzabriskie/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./axios.d.ts","version":"0.14.0"}
+module.exports = {"_from":"axios@^0.14.0","_id":"axios@0.14.0","_inBundle":false,"_integrity":"sha1-QPJPL06RO5+qQ9OnsuQKuHKa+pA=","_location":"/axios","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"axios@^0.14.0","name":"axios","escapedName":"axios","rawSpec":"^0.14.0","saveSpec":null,"fetchSpec":"^0.14.0"},"_requiredBy":["/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.14.0.tgz","_shasum":"40f24f2f4e913b9faa43d3a7b2e40ab8729afa90","_spec":"axios@^0.14.0","_where":"D:\\github_milkmidi\\dotnet-vue-ssr-example","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/mzabriskie/axios/issues"},"bundleDependencies":false,"dependencies":{"follow-redirects":"0.0.7"},"deprecated":false,"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^2.11.9","es6-promise":"^3.2.1","grunt":"0.4.5","grunt-banner":"0.6.0","grunt-cli":"0.1.13","grunt-contrib-clean":"1.0.0","grunt-contrib-nodeunit":"1.0.0","grunt-contrib-watch":"0.6.1","grunt-eslint":"18.0.0","grunt-karma":"0.12.1","grunt-ts":"5.3.2","grunt-typings":"0.1.5","grunt-webpack":"1.0.11","istanbul-instrumenter-loader":"^0.2.0","jasmine-core":"^2.4.1","karma":"^0.13.22","karma-chrome-launcher":"^1.0.1","karma-coverage":"^1.0.0","karma-firefox-launcher":"^1.0.0","karma-jasmine":"^1.0.2","karma-jasmine-ajax":"^0.1.13","karma-opera-launcher":"^1.0.0","karma-phantomjs-launcher":"^1.0.0","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^1.0.0","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.7","karma-webpack":"^1.7.0","load-grunt-tasks":"3.4.1","minimist":"^1.2.0","phantomjs-prebuilt":"^2.1.7","sinon":"^1.17.4","url-search-params":"^0.5.0","webpack":"^1.13.1","webpack-dev-server":"^1.14.1"},"homepage":"https://github.com/mzabriskie/axios","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/mzabriskie/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./axios.d.ts","version":"0.14.0"}
 
 /***/ }),
 /* 80 */
@@ -18441,10 +18448,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "D:\\github_ml\\dotnet_example\\ClientApp\\components\\Dashboard.vue"
+__vue_options__.__file = "D:\\github_milkmidi\\dotnet-vue-ssr-example\\ClientApp\\components\\Dashboard.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-77e9a9b8"
+__vue_options__._scopeId = "data-v-109adab6"
 if (__vue_options__.functional) {console.error("[vue-loader] Dashboard.vue: functional components are not supported and should be defined in plain js files using render functions.")}
 
 module.exports = __vue_exports__
@@ -18465,6 +18472,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 var __vue_exports__, __vue_options__
 var __vue_styles__ = {}
 
+/* styles */
+
 /* script */
 __vue_exports__ = __webpack_require__(173)
 
@@ -18481,9 +18490,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "D:\\github_ml\\dotnet_example\\ClientApp\\components\\Messages.vue"
+__vue_options__.__file = "D:\\github_milkmidi\\dotnet-vue-ssr-example\\ClientApp\\components\\Messages.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__._scopeId = "data-v-4a0b7b4b"
 if (__vue_options__.functional) {console.error("[vue-loader] Messages.vue: functional components are not supported and should be defined in plain js files using render functions.")}
 
 module.exports = __vue_exports__
@@ -18525,6 +18535,10 @@ exports.default = {
 
   computed: (0, _vuex.mapGetters)(['messages', 'lastFetchedMessageDate']),
   methods: (0, _vuex.mapActions)(['fetchMessages']),
+  mounted: function mounted() {
+    console.log(process.env.NODE_ENV);
+  },
+
   components: {
     Message: _Message2.default
   }
@@ -18555,10 +18569,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "D:\\github_ml\\dotnet_example\\ClientApp\\components\\Message.vue"
+__vue_options__.__file = "D:\\github_milkmidi\\dotnet-vue-ssr-example\\ClientApp\\components\\Message.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-39d000ab"
+__vue_options__._scopeId = "data-v-e2af7e50"
 if (__vue_options__.functional) {console.error("[vue-loader] Message.vue: functional components are not supported and should be defined in plain js files using render functions.")}
 
 module.exports = __vue_exports__
@@ -18591,7 +18605,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_vm._l((_vm.messages), function(msg, index) {
+  return _c('div', {
+    staticClass: "messages"
+  }, [_vm._l((_vm.messages), function(msg, index) {
     return _c('Message', {
       key: index,
       attrs: {

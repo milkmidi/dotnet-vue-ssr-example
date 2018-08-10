@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using dotnet_example.Models;
 using VueDotnetSSR.Models;
 namespace dotnet_example.Controllers {
+
+  
   public class HomeController : Controller {
     public IActionResult Index() {
       return View();
     }
-    [Route("initialMessages")]
+    [Route("api/initialMessages")]
     public JsonResult InitialMessages() {
       var initialMessages = FakeMessageStore.FakeMessages.OrderByDescending(m => m.Date).Take(2);
 
@@ -23,7 +25,7 @@ namespace dotnet_example.Controllers {
       return Json(initialValues);
     }
 
-    [Route("fetchMessages")]
+    [Route("api/fetchMessages")]
     public JsonResult FetchMessages(DateTime lastFetchedMessageDate) {
       return Json(FakeMessageStore.FakeMessages.OrderByDescending(m => m.Date).SkipWhile(m => m.Date >= lastFetchedMessageDate).Take(1));
     }

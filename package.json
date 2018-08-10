@@ -1,6 +1,6 @@
 {
-  "version": "1.0.0",
   "name": "VueDotnetSSR",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "cross-env ASPNETCORE_ENVIRONMENT=Development dotnet watch run",

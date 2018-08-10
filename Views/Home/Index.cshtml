@@ -5,7 +5,7 @@
   <title>dotnet Vue SSR Example</title>
 </head>
 <body>
-  <div id="root" asp-prerender-module="ClientApp/renderOnServer"></div>
+  <div id="root" asp-prerender-module="ClientApp/renderOnServer" asp-prerender-data='new {UserName="milkmidi"}'></div>
   <script src="~/dist/main-client.js" asp-append-version="true"></script>
 </body>
 
