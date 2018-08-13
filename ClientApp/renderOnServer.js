@@ -11,7 +11,6 @@ const code = fs.readFileSync(filePath, 'utf8');
 const bundleRenderer = require('vue-server-renderer').createBundleRenderer(code);
 
 module.exports = prerendering.createServerRenderer(function (params) {
-  console.log(params);
   return new Promise(function (resolve, reject) {
     const context = { url: params.url };  
     

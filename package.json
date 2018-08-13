@@ -5,8 +5,8 @@
   "scripts": {
     "start": "cross-env ASPNETCORE_ENVIRONMENT=Development dotnet watch run",
     "publish": "dotnet publish -c Release",
-    "start-pro": "dotnet bin/Release/netcoreapp2.1/dotnet_example.dll",
-    "build": "webpack"
+    "start-pro": "cross-env ASPNETCORE_ENVIRONMENT=Production dotnet bin/Release/netcoreapp2.1/dotnet_example.dll",
+    "build": "cross-env NODE_ENV=producntion webpack"
   },
   "dependencies": {
     "aspnet-prerendering": "^3.0.1",

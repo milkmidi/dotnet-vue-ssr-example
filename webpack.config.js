@@ -4,7 +4,8 @@ const merge = require('webpack-merge');
 
 module.exports = (env) => {
   const isDevBuild = !(env && env.prod);
-
+  console.log('isDevBuild',isDevBuild);
+  process.env.NODE_ENV = isDevBuild ? 'development': 'production';
   const sharedConfig = () => ({
     stats: { modules: false },
     resolve: { extensions: ['.js', '.vue'] },
@@ -29,7 +30,14 @@ module.exports = (env) => {
           loader: "style-loader!css-loader" 
         }
       ]
-    }
+    },
+    plugins:[
+      new webpack.DefinePlugin({
+        'process.env':{
+          'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+        }
+      })
+    ]
   });
 
   const clientBundleOutputDir = './wwwroot/dist';
