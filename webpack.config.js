@@ -1,11 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 module.exports = (env) => {
-  const isDevBuild = !(env && env.prod);
-  console.log('isDevBuild',isDevBuild);
-  process.env.NODE_ENV = isDevBuild ? 'development': 'production';
   const sharedConfig = () => ({
     stats: { modules: false },
     resolve: { extensions: ['.js', '.vue'] },
@@ -36,7 +33,8 @@ module.exports = (env) => {
         'process.env':{
           'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
         }
-      })
+      }),
+      new UglifyJsPlugin()
     ]
   });
 
@@ -60,7 +58,7 @@ module.exports = (env) => {
         {
           test: /\.json?$/,
           loader: 'json-loader'
-          }
+        }
       ]
     },
   });
