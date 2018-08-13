@@ -1,5 +1,6 @@
 <template>
   <div class="messages">
+    <h1>Messages</h1>
     <Message v-for="(msg, index) in messages" :message="msg" :key="index" />
     <button @click="fetchMessages(lastFetchedMessageDate)">Fetch a message</button>
   </div>
@@ -25,7 +26,7 @@ export default {
 </script>
 
 <style scoped>
-.messages{
-  border:1px solid black;
+h1{
+  font-size: 50px;
 }
 </style>

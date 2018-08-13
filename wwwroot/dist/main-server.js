@@ -10942,6 +10942,8 @@ exports.store = _store2.default;
 var __vue_exports__, __vue_options__
 var __vue_styles__ = {}
 
+/* styles */
+
 /* template */
 var __vue_template__ = __webpack_require__(50)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
@@ -10958,6 +10960,7 @@ if (typeof __vue_options__ === "function") {
 __vue_options__.__file = "D:\\github_milkmidi\\dotnet-vue-ssr-example\\ClientApp\\components\\App.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__._scopeId = "data-v-30783b1c"
 if (__vue_options__.functional) {console.error("[vue-loader] App.vue: functional components are not supported and should be defined in plain js files using render functions.")}
 
 module.exports = __vue_exports__
@@ -10972,7 +10975,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "app"
     }
-  }, [_c('h1', [_vm._v("App")]), _vm._v(" "), _c('router-link', {
+  }, [_c('h1', {
+    staticClass: "h1"
+  }, [_vm._v("Dotnet Core Vue SSR Example")]), _vm._v(" "), _c('router-link', {
     staticClass: "router-link-item",
     attrs: {
       "to": "/"
@@ -18462,7 +18467,7 @@ module.exports = __vue_exports__
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('h1', [_vm._v("Dashboard 你好123123456")])
+  return _c('h1', [_vm._v("Dashboard 你好")])
 },staticRenderFns: []}
 
 /***/ }),
@@ -18518,6 +18523,7 @@ var _Message2 = _interopRequireDefault(_Message);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
 //
 //
 //
@@ -18597,7 +18603,13 @@ exports.default = {
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('h1', [_vm._v("Messages")]), _vm._v(" "), _c('h2', [_vm._v(_vm._s(_vm.message.title))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.message.text))])])
+  return _c('div', {
+    staticClass: "message"
+  }, [_c('p', {
+    staticClass: "title"
+  }, [_vm._v(_vm._s(_vm.message.title))]), _c('p', {
+    staticClass: "text"
+  }, [_vm._v(_vm._s(_vm.message.text))])])
 },staticRenderFns: []}
 
 /***/ }),
@@ -18607,7 +18619,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "messages"
-  }, [_vm._l((_vm.messages), function(msg, index) {
+  }, [_c('h1', [_vm._v("Messages")]), _vm._v(" "), _vm._l((_vm.messages), function(msg, index) {
     return _c('Message', {
       key: index,
       attrs: {

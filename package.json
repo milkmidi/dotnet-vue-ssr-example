@@ -1,9 +1,11 @@
 {
-  "name": "VueDotnetSSR",
+  "name": "dotnet-vue-ssr",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "cross-env ASPNETCORE_ENVIRONMENT=Development dotnet watch run",
+    "publish": "dotnet publish -c Release",
+    "start-pro": "dotnet bin/Release/netcoreapp2.1/dotnet_example.dll",
     "build": "webpack"
   },
   "dependencies": {

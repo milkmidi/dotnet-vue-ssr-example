@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.SpaServices.Webpack;
+using Microsoft.AspNetCore.HttpOverrides;
+
 namespace dotnet_example {
   public class Startup {
     public Startup(IHostingEnvironment env) {
@@ -33,6 +35,10 @@ namespace dotnet_example {
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
       Console.Write("Press any key to continue...");
+      app.UseForwardedHeaders(new ForwardedHeadersOptions {
+        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+      });
+      app.UseAuthentication();
       if (env.IsDevelopment()) {
         app.UseDeveloperExceptionPage();
         app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
