@@ -2,7 +2,6 @@ import axios from 'axios';
 
 var axiosInstance = axios.create({
   baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'https://node.medialand.tw/' ,
-  /* other custom settings */
 });
 
 export const fetchInitialMessages = ({ commit }) => {

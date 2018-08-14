@@ -35,6 +35,7 @@ namespace dotnet_example {
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
       Console.Write("Press any key to continue...");
+      Console.Write("env" + env.IsDevelopment());
       app.UseForwardedHeaders(new ForwardedHeadersOptions {
         ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
       });

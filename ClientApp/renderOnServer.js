@@ -13,6 +13,8 @@ const bundleRenderer = require('vue-server-renderer').createBundleRenderer(code)
 module.exports = prerendering.createServerRenderer(function (params) {
   return new Promise(function (resolve, reject) {
     const context = { url: params.url };  
+
+    console.log(process.env.NODE_ENV);
     
     console.log("--- ssr ---", params.url);
     bundleRenderer.renderToString(context, (err, resultHtml) => {
@@ -24,7 +26,7 @@ module.exports = prerendering.createServerRenderer(function (params) {
         html: resultHtml,
         globals: {
           __INITIAL_STATE__: context.state,
-          __USER_DATA: params.data
+          __USER_DATA__: params.data
         }
       });
     });
