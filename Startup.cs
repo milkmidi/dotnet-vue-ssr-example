@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.AspNetCore.HttpOverrides;
+using System.Diagnostics;
 
 namespace dotnet_example {
   public class Startup {
