@@ -11,17 +11,6 @@ using Microsoft.Extensions.Logging;
 namespace dotnet_example {
   public class Program {
     public static void Main(string[] args) {
-      /* var config = new ConfigurationBuilder()
-            .AddCommandLine(args)
-            .Build();
-      var host = new WebHostBuilder()
-          .UseConfiguration(config)
-          .UseKestrel()
-          .UseContentRoot(Directory.GetCurrentDirectory())
-          .UseStartup<Startup>()
-          .UseUrls("http://0.0.0.0:5000")
-          .Build();
-      host.Run(); */
       BuildWebHost(args).Run();
     }
 

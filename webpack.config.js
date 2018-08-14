@@ -46,7 +46,7 @@ module.exports = (env) => {
   const clientBundleConfig = merge(sharedConfig(), {
     entry: { 'main-client': './ClientApp/client.js' },
     output: {
-        path: path.join(__dirname, clientBundleOutputDir)
+      path: path.join(__dirname, clientBundleOutputDir)
     }
   });
 

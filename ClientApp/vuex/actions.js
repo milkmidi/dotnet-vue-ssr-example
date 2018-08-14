@@ -6,7 +6,7 @@ var axiosInstance = axios.create({
 
 export const fetchInitialMessages = ({ commit }) => {
   // axios issus ? , need full-URI
-  return axiosInstance.get( 'http://localhost:5000/api/initialMessages').then(response => {
+  return axiosInstance.get('/api/initialMessages').then(response => {
     commit("INITIAL_MESSAGES", response.data);
   }).catch(err => {
     console.log(err);
