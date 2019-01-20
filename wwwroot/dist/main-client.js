@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "1cc5731f8912eda1f9a1"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0d0b2ff19216b2a3a8a0"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -9986,7 +9986,7 @@ exports = module.exports = __webpack_require__(6)();
 
 
 // module
-exports.push([module.i, "\n.h1[data-v-30783b1c]{\n  font-size: 60px;\n}\n", ""]);
+exports.push([module.i, "\n.h1[data-v-a0c3e4aa]{\n  font-size: 60px;\n}\n", ""]);
 
 // exports
 
@@ -10164,7 +10164,7 @@ exports = module.exports = __webpack_require__(6)();
 
 
 // module
-exports.push([module.i, "\nh1[data-v-109adab6]{\n  color:red;\n}\n", ""]);
+exports.push([module.i, "\nh1[data-v-6743af1e]{\n  color:red;\n}\n", ""]);
 
 // exports
 
@@ -10178,7 +10178,7 @@ exports = module.exports = __webpack_require__(6)();
 
 
 // module
-exports.push([module.i, "\nh1[data-v-4a0b7b4b]{\n  font-size: 50px;\n}\n", ""]);
+exports.push([module.i, "\nh1[data-v-1c186bb2]{\n  font-size: 50px;\n}\n", ""]);
 
 // exports
 
@@ -10192,7 +10192,7 @@ exports = module.exports = __webpack_require__(6)();
 
 
 // module
-exports.push([module.i, "\n.message[data-v-e2af7e50]{\n  border: 1px solid black;\n}\n.title[data-v-e2af7e50]{\n  font-size: 20px\n}\n.text[data-v-e2af7e50]{\n  font-size: 16px\n}\n", ""]);
+exports.push([module.i, "\n.message[data-v-3a982791]{\n  border: 1px solid black;\n}\n.title[data-v-3a982791]{\n  font-size: 20px\n}\n.text[data-v-3a982791]{\n  font-size: 16px\n}\n", ""]);
 
 // exports
 
@@ -14966,10 +14966,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "D:\\github_milkmidi\\dotnet-vue-ssr-example\\ClientApp\\components\\App.vue"
+__vue_options__.__file = "D:\\88_github_repository\\milkmidi\\dotnet-vue-ssr-example\\ClientApp\\components\\App.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-30783b1c"
+__vue_options__._scopeId = "data-v-a0c3e4aa"
 
 /* hot reload */
 if (true) {(function () {
@@ -14978,9 +14978,9 @@ if (true) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-30783b1c", __vue_options__)
+    hotAPI.createRecord("data-v-a0c3e4aa", __vue_options__)
   } else {
-    hotAPI.reload("data-v-30783b1c", __vue_options__)
+    hotAPI.reload("data-v-a0c3e4aa", __vue_options__)
   }
 })()}
 if (__vue_options__.functional) {console.error("[vue-loader] App.vue: functional components are not supported and should be defined in plain js files using render functions.")}
@@ -15058,7 +15058,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 if (true) {
   module.hot.accept()
   if (module.hot.data) {
-     __webpack_require__(2).rerender("data-v-30783b1c", module.exports)
+     __webpack_require__(2).rerender("data-v-a0c3e4aa", module.exports)
   }
 }
 
@@ -21437,10 +21437,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "D:\\github_milkmidi\\dotnet-vue-ssr-example\\ClientApp\\components\\Dashboard.vue"
+__vue_options__.__file = "D:\\88_github_repository\\milkmidi\\dotnet-vue-ssr-example\\ClientApp\\components\\Dashboard.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-109adab6"
+__vue_options__._scopeId = "data-v-6743af1e"
 
 /* hot reload */
 if (true) {(function () {
@@ -21449,9 +21449,9 @@ if (true) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-109adab6", __vue_options__)
+    hotAPI.createRecord("data-v-6743af1e", __vue_options__)
   } else {
-    hotAPI.reload("data-v-109adab6", __vue_options__)
+    hotAPI.reload("data-v-6743af1e", __vue_options__)
   }
 })()}
 if (__vue_options__.functional) {console.error("[vue-loader] Dashboard.vue: functional components are not supported and should be defined in plain js files using render functions.")}
@@ -21495,7 +21495,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 if (true) {
   module.hot.accept()
   if (module.hot.data) {
-     __webpack_require__(2).rerender("data-v-109adab6", module.exports)
+     __webpack_require__(2).rerender("data-v-6743af1e", module.exports)
   }
 }
 
@@ -21525,10 +21525,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "D:\\github_milkmidi\\dotnet-vue-ssr-example\\ClientApp\\components\\Messages.vue"
+__vue_options__.__file = "D:\\88_github_repository\\milkmidi\\dotnet-vue-ssr-example\\ClientApp\\components\\Messages.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-4a0b7b4b"
+__vue_options__._scopeId = "data-v-1c186bb2"
 
 /* hot reload */
 if (true) {(function () {
@@ -21537,9 +21537,9 @@ if (true) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4a0b7b4b", __vue_options__)
+    hotAPI.createRecord("data-v-1c186bb2", __vue_options__)
   } else {
-    hotAPI.reload("data-v-4a0b7b4b", __vue_options__)
+    hotAPI.reload("data-v-1c186bb2", __vue_options__)
   }
 })()}
 if (__vue_options__.functional) {console.error("[vue-loader] Messages.vue: functional components are not supported and should be defined in plain js files using render functions.")}
@@ -21643,10 +21643,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "D:\\github_milkmidi\\dotnet-vue-ssr-example\\ClientApp\\components\\Message.vue"
+__vue_options__.__file = "D:\\88_github_repository\\milkmidi\\dotnet-vue-ssr-example\\ClientApp\\components\\Message.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-e2af7e50"
+__vue_options__._scopeId = "data-v-3a982791"
 
 /* hot reload */
 if (true) {(function () {
@@ -21655,9 +21655,9 @@ if (true) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-e2af7e50", __vue_options__)
+    hotAPI.createRecord("data-v-3a982791", __vue_options__)
   } else {
-    hotAPI.reload("data-v-e2af7e50", __vue_options__)
+    hotAPI.reload("data-v-3a982791", __vue_options__)
   }
 })()}
 if (__vue_options__.functional) {console.error("[vue-loader] Message.vue: functional components are not supported and should be defined in plain js files using render functions.")}
@@ -21721,7 +21721,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 if (true) {
   module.hot.accept()
   if (module.hot.data) {
-     __webpack_require__(2).rerender("data-v-e2af7e50", module.exports)
+     __webpack_require__(2).rerender("data-v-3a982791", module.exports)
   }
 }
 
@@ -21751,7 +21751,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 if (true) {
   module.hot.accept()
   if (module.hot.data) {
-     __webpack_require__(2).rerender("data-v-4a0b7b4b", module.exports)
+     __webpack_require__(2).rerender("data-v-1c186bb2", module.exports)
   }
 }
 

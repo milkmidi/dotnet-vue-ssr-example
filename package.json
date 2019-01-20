@@ -5,7 +5,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development ASPNETCORE_ENVIRONMENT=Development dotnet watch run",
     "publish": "dotnet publish -c Release",
-    "start-pro": "cross-env NODE_ENV=production ASPNETCORE_ENVIRONMENT=Production dotnet bin/Release/netcoreapp2.1/dotnet_example.dll",
+    "start-pro": "cross-env NODE_ENV=production ASPNETCORE_ENVIRONMENT=Production dotnet bin/Release/netcoreapp2.2/dotnet_example.dll",
     "build": "cross-env NODE_ENV=producntion webpack && npm run publish"
   },
   "dependencies": {
