@@ -421,8 +421,8 @@ module.exports = isArray;
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsNative = __webpack_require__(101),
-    getValue = __webpack_require__(104);
+var baseIsNative = __webpack_require__(102),
+    getValue = __webpack_require__(105);
 
 /**
  * Gets the native function at `key` of `object`.
@@ -445,8 +445,8 @@ module.exports = getNative;
 /***/ (function(module, exports, __webpack_require__) {
 
 var Symbol = __webpack_require__(7),
-    getRawTag = __webpack_require__(86),
-    objectToString = __webpack_require__(87);
+    getRawTag = __webpack_require__(87),
+    objectToString = __webpack_require__(88);
 
 /** `Object#toString` result references. */
 var nullTag = '[object Null]',
@@ -560,11 +560,11 @@ module.exports = Symbol;
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var listCacheClear = __webpack_require__(91),
-    listCacheDelete = __webpack_require__(92),
-    listCacheGet = __webpack_require__(93),
-    listCacheHas = __webpack_require__(94),
-    listCacheSet = __webpack_require__(95);
+var listCacheClear = __webpack_require__(92),
+    listCacheDelete = __webpack_require__(93),
+    listCacheGet = __webpack_require__(94),
+    listCacheHas = __webpack_require__(95),
+    listCacheSet = __webpack_require__(96);
 
 /**
  * Creates an list cache object.
@@ -637,7 +637,7 @@ module.exports = nativeCreate;
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isKeyable = __webpack_require__(113);
+var isKeyable = __webpack_require__(114);
 
 /**
  * Gets the data for `map`.
@@ -1055,12 +1055,12 @@ var config = ({
   /**
    * Show production mode tip message on boot?
    */
-  productionTip: process.env.NODE_ENV !== 'production',
+  productionTip: "development" !== 'production',
 
   /**
    * Whether to enable devtools
    */
-  devtools: process.env.NODE_ENV !== 'production',
+  devtools: "development" !== 'production',
 
   /**
    * Whether to record perf
@@ -1263,7 +1263,7 @@ var tip = noop;
 var generateComponentTrace = (noop); // work around flow check
 var formatComponentName = (noop);
 
-if (process.env.NODE_ENV !== 'production') {
+if (true) {
   var hasConsole = typeof console !== 'undefined';
   var classifyRE = /(?:^|[-_])(\w)/g;
   var classify = function (str) { return str
@@ -1690,7 +1690,7 @@ function defineReactive (
         return
       }
       /* eslint-enable no-self-compare */
-      if (process.env.NODE_ENV !== 'production' && customSetter) {
+      if ("development" !== 'production' && customSetter) {
         customSetter();
       }
       if (setter) {
@@ -1710,7 +1710,7 @@ function defineReactive (
  * already exist.
  */
 function set (target, key, val) {
-  if (process.env.NODE_ENV !== 'production' &&
+  if ("development" !== 'production' &&
     (isUndef(target) || isPrimitive(target))
   ) {
     warn(("Cannot set reactive property on undefined, null, or primitive value: " + ((target))));
@@ -1726,7 +1726,7 @@ function set (target, key, val) {
   }
   var ob = (target).__ob__;
   if (target._isVue || (ob && ob.vmCount)) {
-    process.env.NODE_ENV !== 'production' && warn(
+    "development" !== 'production' && warn(
       'Avoid adding reactive properties to a Vue instance or its root $data ' +
       'at runtime - declare it upfront in the data option.'
     );
@@ -1745,7 +1745,7 @@ function set (target, key, val) {
  * Delete a property and trigger change if necessary.
  */
 function del (target, key) {
-  if (process.env.NODE_ENV !== 'production' &&
+  if ("development" !== 'production' &&
     (isUndef(target) || isPrimitive(target))
   ) {
     warn(("Cannot delete reactive property on undefined, null, or primitive value: " + ((target))));
@@ -1756,7 +1756,7 @@ function del (target, key) {
   }
   var ob = (target).__ob__;
   if (target._isVue || (ob && ob.vmCount)) {
-    process.env.NODE_ENV !== 'production' && warn(
+    "development" !== 'production' && warn(
       'Avoid deleting properties on a Vue instance or its root $data ' +
       '- just set it to null.'
     );
@@ -1798,7 +1798,7 @@ var strats = config.optionMergeStrategies;
 /**
  * Options with restrictions
  */
-if (process.env.NODE_ENV !== 'production') {
+if (true) {
   strats.el = strats.propsData = function (parent, child, vm, key) {
     if (!vm) {
       warn(
@@ -1882,7 +1882,7 @@ strats.data = function (
 ) {
   if (!vm) {
     if (childVal && typeof childVal !== 'function') {
-      process.env.NODE_ENV !== 'production' && warn(
+      "development" !== 'production' && warn(
         'The "data" option should be a function ' +
         'that returns a per-instance value in component ' +
         'definitions.',
@@ -1932,7 +1932,7 @@ function mergeAssets (
 ) {
   var res = Object.create(parentVal || null);
   if (childVal) {
-    process.env.NODE_ENV !== 'production' && assertObjectType(key, childVal, vm);
+    "development" !== 'production' && assertObjectType(key, childVal, vm);
     return extend(res, childVal)
   } else {
     return res
@@ -1960,7 +1960,7 @@ strats.watch = function (
   if (childVal === nativeWatch) { childVal = undefined; }
   /* istanbul ignore if */
   if (!childVal) { return Object.create(parentVal || null) }
-  if (process.env.NODE_ENV !== 'production') {
+  if (true) {
     assertObjectType(key, childVal, vm);
   }
   if (!parentVal) { return childVal }
@@ -1991,7 +1991,7 @@ strats.computed = function (
   vm,
   key
 ) {
-  if (childVal && process.env.NODE_ENV !== 'production') {
+  if (childVal && "development" !== 'production') {
     assertObjectType(key, childVal, vm);
   }
   if (!parentVal) { return childVal }
@@ -2052,7 +2052,7 @@ function normalizeProps (options, vm) {
       if (typeof val === 'string') {
         name = camelize(val);
         res[name] = { type: null };
-      } else if (process.env.NODE_ENV !== 'production') {
+      } else if (true) {
         warn('props must be strings when using array syntax.');
       }
     }
@@ -2064,7 +2064,7 @@ function normalizeProps (options, vm) {
         ? val
         : { type: val };
     }
-  } else if (process.env.NODE_ENV !== 'production') {
+  } else if (true) {
     warn(
       "Invalid value for option \"props\": expected an Array or an Object, " +
       "but got " + (toRawType(props)) + ".",
@@ -2092,7 +2092,7 @@ function normalizeInject (options, vm) {
         ? extend({ from: key }, val)
         : { from: val };
     }
-  } else if (process.env.NODE_ENV !== 'production') {
+  } else if (true) {
     warn(
       "Invalid value for option \"inject\": expected an Array or an Object, " +
       "but got " + (toRawType(inject)) + ".",
@@ -2135,7 +2135,7 @@ function mergeOptions (
   child,
   vm
 ) {
-  if (process.env.NODE_ENV !== 'production') {
+  if (true) {
     checkComponents(child);
   }
 
@@ -2196,7 +2196,7 @@ function resolveAsset (
   if (hasOwn(assets, PascalCaseId)) { return assets[PascalCaseId] }
   // fallback to prototype chain
   var res = assets[id] || assets[camelizedId] || assets[PascalCaseId];
-  if (process.env.NODE_ENV !== 'production' && warnMissing && !res) {
+  if ("development" !== 'production' && warnMissing && !res) {
     warn(
       'Failed to resolve ' + type.slice(0, -1) + ': ' + id,
       options
@@ -2241,9 +2241,7 @@ function validateProp (
     toggleObserving(prevShouldObserve);
   }
   if (
-    process.env.NODE_ENV !== 'production' &&
-    // skip validation for weex recycle-list child component props
-    !(false && isObject(value) && ('@binding' in value))
+    true
   ) {
     assertProp(prop, key, value, vm, absent);
   }
@@ -2260,7 +2258,7 @@ function getPropDefaultValue (vm, prop, key) {
   }
   var def = prop.default;
   // warn against non-factory defaults for Object & Array
-  if (process.env.NODE_ENV !== 'production' && isObject(def)) {
+  if ("development" !== 'production' && isObject(def)) {
     warn(
       'Invalid default value for prop "' + key + '": ' +
       'Props with type Object/Array must use a factory function ' +
@@ -2421,7 +2419,7 @@ function globalHandleError (err, vm, info) {
 }
 
 function logError (err, vm, info) {
-  if (process.env.NODE_ENV !== 'production') {
+  if (true) {
     warn(("Error in " + info + ": \"" + (err.toString()) + "\""), vm);
   }
   /* istanbul ignore else */
@@ -2552,7 +2550,7 @@ function nextTick (cb, ctx) {
 
 var initProxy;
 
-if (process.env.NODE_ENV !== 'production') {
+if (true) {
   var allowedGlobals = makeMap(
     'Infinity,undefined,NaN,isFinite,isNaN,' +
     'parseFloat,parseInt,decodeURI,decodeURIComponent,encodeURI,encodeURIComponent,' +
@@ -2663,7 +2661,7 @@ function _traverse (val, seen) {
 var mark;
 var measure;
 
-if (process.env.NODE_ENV !== 'production') {
+if (true) {
   var perf = inBrowser && window.performance;
   /* istanbul ignore if */
   if (
@@ -2733,7 +2731,7 @@ function updateListeners (
     event = normalizeEvent(name);
     /* istanbul ignore if */
     if (isUndef(cur)) {
-      process.env.NODE_ENV !== 'production' && warn(
+      "development" !== 'production' && warn(
         "Invalid handler for event \"" + (event.name) + "\": got " + String(cur),
         vm
       );
@@ -2810,7 +2808,7 @@ function extractPropsFromVNodeData (
   if (isDef(attrs) || isDef(props)) {
     for (var key in propOptions) {
       var altKey = hyphenate(key);
-      if (process.env.NODE_ENV !== 'production') {
+      if (true) {
         var keyInLowerCase = key.toLowerCase();
         if (
           key !== keyInLowerCase &&
@@ -3013,7 +3011,7 @@ function resolveAsyncComponent (
     });
 
     var reject = once(function (reason) {
-      process.env.NODE_ENV !== 'production' && warn(
+      "development" !== 'production' && warn(
         "Failed to resolve async component: " + (String(factory)) +
         (reason ? ("\nReason: " + reason) : '')
       );
@@ -3056,7 +3054,7 @@ function resolveAsyncComponent (
           setTimeout(function () {
             if (isUndef(factory.resolved)) {
               reject(
-                process.env.NODE_ENV !== 'production'
+                 true
                   ? ("timeout (" + (res.timeout) + "ms)")
                   : null
               );
@@ -3205,7 +3203,7 @@ function eventsMixin (Vue) {
 
   Vue.prototype.$emit = function (event) {
     var vm = this;
-    if (process.env.NODE_ENV !== 'production') {
+    if (true) {
       var lowerCaseEvent = event.toLowerCase();
       if (lowerCaseEvent !== event && vm._events[lowerCaseEvent]) {
         tip(
@@ -3432,7 +3430,7 @@ function mountComponent (
   vm.$el = el;
   if (!vm.$options.render) {
     vm.$options.render = createEmptyVNode;
-    if (process.env.NODE_ENV !== 'production') {
+    if (true) {
       /* istanbul ignore if */
       if ((vm.$options.template && vm.$options.template.charAt(0) !== '#') ||
         vm.$options.el || el) {
@@ -3454,7 +3452,7 @@ function mountComponent (
 
   var updateComponent;
   /* istanbul ignore if */
-  if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
+  if ("development" !== 'production' && config.performance && mark) {
     updateComponent = function () {
       var name = vm._name;
       var id = vm._uid;
@@ -3499,7 +3497,7 @@ function updateChildComponent (
   parentVnode,
   renderChildren
 ) {
-  if (process.env.NODE_ENV !== 'production') {
+  if (true) {
     isUpdatingChildComponent = true;
   }
 
@@ -3553,7 +3551,7 @@ function updateChildComponent (
     vm.$forceUpdate();
   }
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (true) {
     isUpdatingChildComponent = false;
   }
 }
@@ -3637,7 +3635,7 @@ var index = 0;
 function resetSchedulerState () {
   index = queue.length = activatedChildren.length = 0;
   has = {};
-  if (process.env.NODE_ENV !== 'production') {
+  if (true) {
     circular = {};
   }
   waiting = flushing = false;
@@ -3668,7 +3666,7 @@ function flushSchedulerQueue () {
     has[id] = null;
     watcher.run();
     // in dev build, check and stop circular updates.
-    if (process.env.NODE_ENV !== 'production' && has[id] != null) {
+    if ("development" !== 'production' && has[id] != null) {
       circular[id] = (circular[id] || 0) + 1;
       if (circular[id] > MAX_UPDATE_COUNT) {
         warn(
@@ -3796,7 +3794,7 @@ var Watcher = function Watcher (
   this.newDeps = [];
   this.depIds = new _Set();
   this.newDepIds = new _Set();
-  this.expression = process.env.NODE_ENV !== 'production'
+  this.expression =  true
     ? expOrFn.toString()
     : '';
   // parse expression for getter
@@ -3806,7 +3804,7 @@ var Watcher = function Watcher (
     this.getter = parsePath(expOrFn);
     if (!this.getter) {
       this.getter = function () {};
-      process.env.NODE_ENV !== 'production' && warn(
+      "development" !== 'production' && warn(
         "Failed watching path: \"" + expOrFn + "\" " +
         'Watcher only accepts simple dot-delimited paths. ' +
         'For full control, use a function instead.',
@@ -4021,7 +4019,7 @@ function initProps (vm, propsOptions) {
     keys.push(key);
     var value = validateProp(key, propsOptions, propsData, vm);
     /* istanbul ignore else */
-    if (process.env.NODE_ENV !== 'production') {
+    if (true) {
       var hyphenatedKey = hyphenate(key);
       if (isReservedAttribute(hyphenatedKey) ||
           config.isReservedAttr(hyphenatedKey)) {
@@ -4063,7 +4061,7 @@ function initData (vm) {
     : data || {};
   if (!isPlainObject(data)) {
     data = {};
-    process.env.NODE_ENV !== 'production' && warn(
+    "development" !== 'production' && warn(
       'data functions should return an object:\n' +
       'https://vuejs.org/v2/guide/components.html#data-Must-Be-a-Function',
       vm
@@ -4076,7 +4074,7 @@ function initData (vm) {
   var i = keys.length;
   while (i--) {
     var key = keys[i];
-    if (process.env.NODE_ENV !== 'production') {
+    if (true) {
       if (methods && hasOwn(methods, key)) {
         warn(
           ("Method \"" + key + "\" has already been defined as a data property."),
@@ -4085,7 +4083,7 @@ function initData (vm) {
       }
     }
     if (props && hasOwn(props, key)) {
-      process.env.NODE_ENV !== 'production' && warn(
+      "development" !== 'production' && warn(
         "The data property \"" + key + "\" is already declared as a prop. " +
         "Use prop default value instead.",
         vm
@@ -4122,7 +4120,7 @@ function initComputed (vm, computed) {
   for (var key in computed) {
     var userDef = computed[key];
     var getter = typeof userDef === 'function' ? userDef : userDef.get;
-    if (process.env.NODE_ENV !== 'production' && getter == null) {
+    if ("development" !== 'production' && getter == null) {
       warn(
         ("Getter is missing for computed property \"" + key + "\"."),
         vm
@@ -4144,7 +4142,7 @@ function initComputed (vm, computed) {
     // at instantiation here.
     if (!(key in vm)) {
       defineComputed(vm, key, userDef);
-    } else if (process.env.NODE_ENV !== 'production') {
+    } else if (true) {
       if (key in vm.$data) {
         warn(("The computed property \"" + key + "\" is already defined in data."), vm);
       } else if (vm.$options.props && key in vm.$options.props) {
@@ -4175,7 +4173,7 @@ function defineComputed (
       ? userDef.set
       : noop;
   }
-  if (process.env.NODE_ENV !== 'production' &&
+  if ("development" !== 'production' &&
       sharedPropertyDefinition.set === noop) {
     sharedPropertyDefinition.set = function () {
       warn(
@@ -4205,7 +4203,7 @@ function createComputedGetter (key) {
 function initMethods (vm, methods) {
   var props = vm.$options.props;
   for (var key in methods) {
-    if (process.env.NODE_ENV !== 'production') {
+    if (true) {
       if (methods[key] == null) {
         warn(
           "Method \"" + key + "\" has an undefined value in the component definition. " +
@@ -4267,7 +4265,7 @@ function stateMixin (Vue) {
   dataDef.get = function () { return this._data };
   var propsDef = {};
   propsDef.get = function () { return this._props };
-  if (process.env.NODE_ENV !== 'production') {
+  if (true) {
     dataDef.set = function (newData) {
       warn(
         'Avoid replacing instance root $data. ' +
@@ -4323,7 +4321,7 @@ function initInjections (vm) {
     toggleObserving(false);
     Object.keys(result).forEach(function (key) {
       /* istanbul ignore else */
-      if (process.env.NODE_ENV !== 'production') {
+      if (true) {
         defineReactive(vm, key, result[key], function () {
           warn(
             "Avoid mutating an injected value directly since the changes will be " +
@@ -4368,7 +4366,7 @@ function resolveInject (inject, vm) {
           result[key] = typeof provideDefault === 'function'
             ? provideDefault.call(vm)
             : provideDefault;
-        } else if (process.env.NODE_ENV !== 'production') {
+        } else if (true) {
           warn(("Injection \"" + key + "\" not found"), vm);
         }
       }
@@ -4427,7 +4425,7 @@ function renderSlot (
   if (scopedSlotFn) { // scoped slot
     props = props || {};
     if (bindObject) {
-      if (process.env.NODE_ENV !== 'production' && !isObject(bindObject)) {
+      if ("development" !== 'production' && !isObject(bindObject)) {
         warn(
           'slot v-bind without argument expects an Object',
           this
@@ -4440,7 +4438,7 @@ function renderSlot (
     var slotNodes = this.$slots[name];
     // warn duplicate slot usage
     if (slotNodes) {
-      if (process.env.NODE_ENV !== 'production' && slotNodes._rendered) {
+      if ("development" !== 'production' && slotNodes._rendered) {
         warn(
           "Duplicate presence of slot \"" + name + "\" found in the same render tree " +
           "- this will likely cause render errors.",
@@ -4515,7 +4513,7 @@ function bindObjectProps (
 ) {
   if (value) {
     if (!isObject(value)) {
-      process.env.NODE_ENV !== 'production' && warn(
+      "development" !== 'production' && warn(
         'v-bind without argument expects an Object or Array value',
         this
       );
@@ -4621,7 +4619,7 @@ function markStaticNode (node, key, isOnce) {
 function bindObjectListeners (data, value) {
   if (value) {
     if (!isPlainObject(value)) {
-      process.env.NODE_ENV !== 'production' && warn(
+      "development" !== 'production' && warn(
         'v-on without argument expects an Object value',
         this
       );
@@ -4894,7 +4892,7 @@ function createComponent (
   // if at this stage it's not a constructor or an async component factory,
   // reject.
   if (typeof Ctor !== 'function') {
-    if (process.env.NODE_ENV !== 'production') {
+    if (true) {
       warn(("Invalid Component definition: " + (String(Ctor))), context);
     }
     return
@@ -5053,7 +5051,7 @@ function _createElement (
   normalizationType
 ) {
   if (isDef(data) && isDef((data).__ob__)) {
-    process.env.NODE_ENV !== 'production' && warn(
+    "development" !== 'production' && warn(
       "Avoid using observed data object as vnode data: " + (JSON.stringify(data)) + "\n" +
       'Always create fresh vnode data objects in each render!',
       context
@@ -5069,7 +5067,7 @@ function _createElement (
     return createEmptyVNode()
   }
   // warn against non-primitive key
-  if (process.env.NODE_ENV !== 'production' &&
+  if ("development" !== 'production' &&
     isDef(data) && isDef(data.key) && !isPrimitive(data.key)
   ) {
     {
@@ -5184,7 +5182,7 @@ function initRender (vm) {
   var parentData = parentVnode && parentVnode.data;
 
   /* istanbul ignore else */
-  if (process.env.NODE_ENV !== 'production') {
+  if (true) {
     defineReactive(vm, '$attrs', parentData && parentData.attrs || emptyObject, function () {
       !isUpdatingChildComponent && warn("$attrs is readonly.", vm);
     }, true);
@@ -5212,7 +5210,7 @@ function renderMixin (Vue) {
     var _parentVnode = ref._parentVnode;
 
     // reset _rendered flag on slots for duplicate slot check
-    if (process.env.NODE_ENV !== 'production') {
+    if (true) {
       for (var key in vm.$slots) {
         // $flow-disable-line
         vm.$slots[key]._rendered = false;
@@ -5235,7 +5233,7 @@ function renderMixin (Vue) {
       // return error render result,
       // or previous vnode to prevent render error causing blank component
       /* istanbul ignore else */
-      if (process.env.NODE_ENV !== 'production') {
+      if (true) {
         if (vm.$options.renderError) {
           try {
             vnode = vm.$options.renderError.call(vm._renderProxy, vm.$createElement, e);
@@ -5252,7 +5250,7 @@ function renderMixin (Vue) {
     }
     // return empty vnode in case the render function errored out
     if (!(vnode instanceof VNode)) {
-      if (process.env.NODE_ENV !== 'production' && Array.isArray(vnode)) {
+      if ("development" !== 'production' && Array.isArray(vnode)) {
         warn(
           'Multiple root nodes returned from render function. Render function ' +
           'should return a single root node.',
@@ -5279,7 +5277,7 @@ function initMixin (Vue) {
 
     var startTag, endTag;
     /* istanbul ignore if */
-    if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
+    if ("development" !== 'production' && config.performance && mark) {
       startTag = "vue-perf-start:" + (vm._uid);
       endTag = "vue-perf-end:" + (vm._uid);
       mark(startTag);
@@ -5301,7 +5299,7 @@ function initMixin (Vue) {
       );
     }
     /* istanbul ignore else */
-    if (process.env.NODE_ENV !== 'production') {
+    if (true) {
       initProxy(vm);
     } else {
       vm._renderProxy = vm;
@@ -5318,7 +5316,7 @@ function initMixin (Vue) {
     callHook(vm, 'created');
 
     /* istanbul ignore if */
-    if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
+    if ("development" !== 'production' && config.performance && mark) {
       vm._name = formatComponentName(vm, false);
       mark(endTag);
       measure(("vue " + (vm._name) + " init"), startTag, endTag);
@@ -5409,7 +5407,7 @@ function dedupe (latest, extended, sealed) {
 }
 
 function Vue (options) {
-  if (process.env.NODE_ENV !== 'production' &&
+  if ("development" !== 'production' &&
     !(this instanceof Vue)
   ) {
     warn('Vue is a constructor and should be called with the `new` keyword');
@@ -5478,7 +5476,7 @@ function initExtend (Vue) {
     }
 
     var name = extendOptions.name || Super.options.name;
-    if (process.env.NODE_ENV !== 'production' && name) {
+    if ("development" !== 'production' && name) {
       validateComponentName(name);
     }
 
@@ -5561,7 +5559,7 @@ function initAssetRegisters (Vue) {
         return this.options[type + 's'][id]
       } else {
         /* istanbul ignore if */
-        if (process.env.NODE_ENV !== 'production' && type === 'component') {
+        if ("development" !== 'production' && type === 'component') {
           validateComponentName(id);
         }
         if (type === 'component' && isPlainObject(definition)) {
@@ -5718,7 +5716,7 @@ function initGlobalAPI (Vue) {
   // config
   var configDef = {};
   configDef.get = function () { return config; };
-  if (process.env.NODE_ENV !== 'production') {
+  if (true) {
     configDef.set = function () {
       warn(
         'Do not replace the Vue.config object, set individual fields instead.'
@@ -5985,7 +5983,7 @@ function query (el) {
   if (typeof el === 'string') {
     var selected = document.querySelector(el);
     if (!selected) {
-      process.env.NODE_ENV !== 'production' && warn(
+      "development" !== 'production' && warn(
         'Cannot find element: ' + el
       );
       return document.createElement('div')
@@ -6248,7 +6246,7 @@ function createPatchFunction (backend) {
     var children = vnode.children;
     var tag = vnode.tag;
     if (isDef(tag)) {
-      if (process.env.NODE_ENV !== 'production') {
+      if (true) {
         if (data && data.pre) {
           creatingElmInVPre++;
         }
@@ -6276,7 +6274,7 @@ function createPatchFunction (backend) {
         insert(parentElm, vnode.elm, refElm);
       }
 
-      if (process.env.NODE_ENV !== 'production' && data && data.pre) {
+      if ("development" !== 'production' && data && data.pre) {
         creatingElmInVPre--;
       }
     } else if (isTrue(vnode.isComment)) {
@@ -6363,7 +6361,7 @@ function createPatchFunction (backend) {
 
   function createChildren (vnode, children, insertedVnodeQueue) {
     if (Array.isArray(children)) {
-      if (process.env.NODE_ENV !== 'production') {
+      if (true) {
         checkDuplicateKeys(children);
       }
       for (var i = 0; i < children.length; ++i) {
@@ -6497,7 +6495,7 @@ function createPatchFunction (backend) {
     // during leaving transitions
     var canMove = !removeOnly;
 
-    if (process.env.NODE_ENV !== 'production') {
+    if (true) {
       checkDuplicateKeys(newCh);
     }
 
@@ -6671,7 +6669,7 @@ function createPatchFunction (backend) {
       return true
     }
     // assert node match
-    if (process.env.NODE_ENV !== 'production') {
+    if (true) {
       if (!assertNodeMatch(elm, vnode, inVPre)) {
         return false
       }
@@ -6694,7 +6692,7 @@ function createPatchFunction (backend) {
           if (isDef(i = data) && isDef(i = i.domProps) && isDef(i = i.innerHTML)) {
             if (i !== elm.innerHTML) {
               /* istanbul ignore if */
-              if (process.env.NODE_ENV !== 'production' &&
+              if ("development" !== 'production' &&
                 typeof console !== 'undefined' &&
                 !hydrationBailed
               ) {
@@ -6720,7 +6718,7 @@ function createPatchFunction (backend) {
             // longer than the virtual children list.
             if (!childrenMatch || childNode) {
               /* istanbul ignore if */
-              if (process.env.NODE_ENV !== 'production' &&
+              if ("development" !== 'production' &&
                 typeof console !== 'undefined' &&
                 !hydrationBailed
               ) {
@@ -6795,7 +6793,7 @@ function createPatchFunction (backend) {
             if (hydrate(oldVnode, vnode, insertedVnodeQueue)) {
               invokeInsertHook(vnode, insertedVnodeQueue, true);
               return oldVnode
-            } else if (process.env.NODE_ENV !== 'production') {
+            } else if (true) {
               warn(
                 'The client-side rendered virtual DOM tree is not matching ' +
                 'server-rendered content. This is likely caused by incorrect ' +
@@ -7839,7 +7837,7 @@ function enter (vnode, toggleDisplay) {
       : duration
   );
 
-  if (process.env.NODE_ENV !== 'production' && explicitEnterDuration != null) {
+  if ("development" !== 'production' && explicitEnterDuration != null) {
     checkDuration(explicitEnterDuration, 'enter', vnode);
   }
 
@@ -7947,7 +7945,7 @@ function leave (vnode, rm) {
       : duration
   );
 
-  if (process.env.NODE_ENV !== 'production' && isDef(explicitLeaveDuration)) {
+  if ("development" !== 'production' && isDef(explicitLeaveDuration)) {
     checkDuration(explicitLeaveDuration, 'leave', vnode);
   }
 
@@ -8174,7 +8172,7 @@ function actuallySetSelected (el, binding, vm) {
   var value = binding.value;
   var isMultiple = el.multiple;
   if (isMultiple && !Array.isArray(value)) {
-    process.env.NODE_ENV !== 'production' && warn(
+    "development" !== 'production' && warn(
       "<select multiple v-model=\"" + (binding.expression) + "\"> " +
       "expects an Array value for its binding, but got " + (Object.prototype.toString.call(value).slice(8, -1)),
       vm
@@ -8390,7 +8388,7 @@ var Transition = {
     }
 
     // warn multiple elements
-    if (process.env.NODE_ENV !== 'production' && children.length > 1) {
+    if ("development" !== 'production' && children.length > 1) {
       warn(
         '<transition> can only be used on a single element. Use ' +
         '<transition-group> for lists.',
@@ -8401,7 +8399,7 @@ var Transition = {
     var mode = this.mode;
 
     // warn invalid mode
-    if (process.env.NODE_ENV !== 'production' &&
+    if ("development" !== 'production' &&
       mode && mode !== 'in-out' && mode !== 'out-in'
     ) {
       warn(
@@ -8526,7 +8524,7 @@ var TransitionGroup = {
           children.push(c);
           map[c.key] = c
           ;(c.data || (c.data = {})).transition = transitionData;
-        } else if (process.env.NODE_ENV !== 'production') {
+        } else if (true) {
           var opts = c.componentOptions;
           var name = opts ? (opts.Ctor.options.name || opts.tag || '') : c.tag;
           warn(("<transition-group> children must be keyed: <" + name + ">"));
@@ -8695,8 +8693,8 @@ if (inBrowser) {
       if (devtools) {
         devtools.emit('init', Vue);
       } else if (
-        process.env.NODE_ENV !== 'production' &&
-        process.env.NODE_ENV !== 'test' &&
+        "development" !== 'production' &&
+        "development" !== 'test' &&
         isChrome
       ) {
         console[console.info ? 'info' : 'log'](
@@ -8705,8 +8703,8 @@ if (inBrowser) {
         );
       }
     }
-    if (process.env.NODE_ENV !== 'production' &&
-      process.env.NODE_ENV !== 'test' &&
+    if ("development" !== 'production' &&
+      "development" !== 'test' &&
       config.productionTip !== false &&
       typeof console !== 'undefined'
     ) {
@@ -8802,11 +8800,11 @@ module.exports = isObject;
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var mapCacheClear = __webpack_require__(105),
-    mapCacheDelete = __webpack_require__(112),
-    mapCacheGet = __webpack_require__(114),
-    mapCacheHas = __webpack_require__(115),
-    mapCacheSet = __webpack_require__(116);
+var mapCacheClear = __webpack_require__(106),
+    mapCacheDelete = __webpack_require__(113),
+    mapCacheGet = __webpack_require__(115),
+    mapCacheHas = __webpack_require__(116),
+    mapCacheSet = __webpack_require__(117);
 
 /**
  * Creates a map cache object to store key-value pairs.
@@ -9114,7 +9112,7 @@ ModuleCollection.prototype.register = function register (path, rawModule, runtim
     var this$1 = this;
     if ( runtime === void 0 ) runtime = true;
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (true) {
     assertRawModule(path, rawModule);
   }
 
@@ -9143,7 +9141,7 @@ ModuleCollection.prototype.unregister = function unregister (path) {
 };
 
 function update (path, targetModule, newModule) {
-  if (process.env.NODE_ENV !== 'production') {
+  if (true) {
     assertRawModule(path, newModule);
   }
 
@@ -9154,7 +9152,7 @@ function update (path, targetModule, newModule) {
   if (newModule.modules) {
     for (var key in newModule.modules) {
       if (!targetModule.getChild(key)) {
-        if (process.env.NODE_ENV !== 'production') {
+        if (true) {
           console.warn(
             "[vuex] trying to add a new module '" + key + "' on hot reloading, " +
             'manual reload is needed'
@@ -9225,7 +9223,7 @@ var Store = function Store (options) {
     install(window.Vue);
   }
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (true) {
     assert(Vue, "must call Vue.use(Vuex) before creating a store instance.");
     assert(typeof Promise !== 'undefined', "vuex requires a Promise polyfill in this browser.");
     assert(this instanceof Store, "Store must be called with the new operator.");
@@ -9289,7 +9287,7 @@ prototypeAccessors.state.get = function () {
 };
 
 prototypeAccessors.state.set = function (v) {
-  if (process.env.NODE_ENV !== 'production') {
+  if (true) {
     assert(false, "Use store.replaceState() to explicit replace store state.");
   }
 };
@@ -9306,7 +9304,7 @@ Store.prototype.commit = function commit (_type, _payload, _options) {
   var mutation = { type: type, payload: payload };
   var entry = this._mutations[type];
   if (!entry) {
-    if (process.env.NODE_ENV !== 'production') {
+    if (true) {
       console.error(("[vuex] unknown mutation type: " + type));
     }
     return
@@ -9319,7 +9317,7 @@ Store.prototype.commit = function commit (_type, _payload, _options) {
   this._subscribers.forEach(function (sub) { return sub(mutation, this$1.state); });
 
   if (
-    process.env.NODE_ENV !== 'production' &&
+    "development" !== 'production' &&
     options && options.silent
   ) {
     console.warn(
@@ -9340,7 +9338,7 @@ Store.prototype.dispatch = function dispatch (_type, _payload) {
   var action = { type: type, payload: payload };
   var entry = this._actions[type];
   if (!entry) {
-    if (process.env.NODE_ENV !== 'production') {
+    if (true) {
       console.error(("[vuex] unknown action type: " + type));
     }
     return
@@ -9364,7 +9362,7 @@ Store.prototype.subscribeAction = function subscribeAction (fn) {
 Store.prototype.watch = function watch (getter, cb, options) {
     var this$1 = this;
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (true) {
     assert(typeof getter === 'function', "store.watch only accepts a function.");
   }
   return this._watcherVM.$watch(function () { return getter(this$1.state, this$1.getters); }, cb, options)
@@ -9383,7 +9381,7 @@ Store.prototype.registerModule = function registerModule (path, rawModule, optio
 
   if (typeof path === 'string') { path = [path]; }
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (true) {
     assert(Array.isArray(path), "module path must be a string or an Array.");
     assert(path.length > 0, 'cannot register the root module by using registerModule.');
   }
@@ -9399,7 +9397,7 @@ Store.prototype.unregisterModule = function unregisterModule (path) {
 
   if (typeof path === 'string') { path = [path]; }
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (true) {
     assert(Array.isArray(path), "module path must be a string or an Array.");
   }
 
@@ -9552,7 +9550,7 @@ function makeLocalContext (store, namespace, path) {
 
       if (!options || !options.root) {
         type = namespace + type;
-        if (process.env.NODE_ENV !== 'production' && !store._actions[type]) {
+        if ("development" !== 'production' && !store._actions[type]) {
           console.error(("[vuex] unknown local action type: " + (args.type) + ", global type: " + type));
           return
         }
@@ -9569,7 +9567,7 @@ function makeLocalContext (store, namespace, path) {
 
       if (!options || !options.root) {
         type = namespace + type;
-        if (process.env.NODE_ENV !== 'production' && !store._mutations[type]) {
+        if ("development" !== 'production' && !store._mutations[type]) {
           console.error(("[vuex] unknown local mutation type: " + (args.type) + ", global type: " + type));
           return
         }
@@ -9652,7 +9650,7 @@ function registerAction (store, type, handler, local) {
 
 function registerGetter (store, type, rawGetter, local) {
   if (store._wrappedGetters[type]) {
-    if (process.env.NODE_ENV !== 'production') {
+    if (true) {
       console.error(("[vuex] duplicate getter key: " + type));
     }
     return
@@ -9669,7 +9667,7 @@ function registerGetter (store, type, rawGetter, local) {
 
 function enableStrictMode (store) {
   store._vm.$watch(function () { return this._data.$$state }, function () {
-    if (process.env.NODE_ENV !== 'production') {
+    if (true) {
       assert(store._committing, "Do not mutate vuex store state outside mutation handlers.");
     }
   }, { deep: true, sync: true });
@@ -9688,7 +9686,7 @@ function unifyObjectStyle (type, payload, options) {
     type = type.type;
   }
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (true) {
     assert(typeof type === 'string', ("Expects string as the type, but found " + (typeof type) + "."));
   }
 
@@ -9697,7 +9695,7 @@ function unifyObjectStyle (type, payload, options) {
 
 function install (_Vue) {
   if (Vue && _Vue === Vue) {
-    if (process.env.NODE_ENV !== 'production') {
+    if (true) {
       console.error(
         '[vuex] already installed. Vue.use(Vuex) should be called only once.'
       );
@@ -9772,7 +9770,7 @@ var mapGetters = normalizeNamespace(function (namespace, getters) {
       if (namespace && !getModuleByNamespace(this.$store, 'mapGetters', namespace)) {
         return
       }
-      if (process.env.NODE_ENV !== 'production' && !(val in this.$store.getters)) {
+      if ("development" !== 'production' && !(val in this.$store.getters)) {
         console.error(("[vuex] unknown getter: " + val));
         return
       }
@@ -9837,7 +9835,7 @@ function normalizeNamespace (fn) {
 
 function getModuleByNamespace (store, helper, namespace) {
   var module = store._modulesNamespaceMap[namespace];
-  if (process.env.NODE_ENV !== 'production' && !module) {
+  if ("development" !== 'production' && !module) {
     console.error(("[vuex] module namespace not found in " + helper + "(): " + namespace));
   }
   return module
@@ -10025,7 +10023,7 @@ module.exports = require("https");
 /* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(67)({
+module.exports = __webpack_require__(68)({
   'http': __webpack_require__(25),
   'https': __webpack_require__(26)
 });
@@ -10054,7 +10052,7 @@ exports.coerce = coerce;
 exports.disable = disable;
 exports.enable = enable;
 exports.enabled = enabled;
-exports.humanize = __webpack_require__(70);
+exports.humanize = __webpack_require__(71);
 
 /**
  * The currently active debug mode names, and names to skip.
@@ -10260,11 +10258,11 @@ module.exports = freeGlobal;
 /***/ (function(module, exports, __webpack_require__) {
 
 var ListCache = __webpack_require__(8),
-    stackClear = __webpack_require__(96),
-    stackDelete = __webpack_require__(97),
-    stackGet = __webpack_require__(98),
-    stackHas = __webpack_require__(99),
-    stackSet = __webpack_require__(100);
+    stackClear = __webpack_require__(97),
+    stackDelete = __webpack_require__(98),
+    stackGet = __webpack_require__(99),
+    stackHas = __webpack_require__(100),
+    stackSet = __webpack_require__(101);
 
 /**
  * Creates a stack cache object to store key-value pairs.
@@ -10410,7 +10408,7 @@ module.exports = toSource;
 /* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsEqualDeep = __webpack_require__(117),
+var baseIsEqualDeep = __webpack_require__(118),
     isObjectLike = __webpack_require__(5);
 
 /**
@@ -10444,9 +10442,9 @@ module.exports = baseIsEqual;
 /* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var SetCache = __webpack_require__(118),
-    arraySome = __webpack_require__(121),
-    cacheHas = __webpack_require__(122);
+var SetCache = __webpack_require__(119),
+    arraySome = __webpack_require__(122),
+    cacheHas = __webpack_require__(123);
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1,
@@ -10533,9 +10531,9 @@ module.exports = equalArrays;
 /* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayLikeKeys = __webpack_require__(134),
-    baseKeys = __webpack_require__(141),
-    isArrayLike = __webpack_require__(145);
+var arrayLikeKeys = __webpack_require__(135),
+    baseKeys = __webpack_require__(142),
+    isArrayLike = __webpack_require__(146);
 
 /**
  * Creates an array of the own enumerable property names of `object`.
@@ -10576,7 +10574,7 @@ module.exports = keys;
 /* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsArguments = __webpack_require__(136),
+var baseIsArguments = __webpack_require__(137),
     isObjectLike = __webpack_require__(5);
 
 /** Used for built-in method references. */
@@ -10619,7 +10617,7 @@ module.exports = isArguments;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {var root = __webpack_require__(1),
-    stubFalse = __webpack_require__(137);
+    stubFalse = __webpack_require__(138);
 
 /** Detect free variable `exports`. */
 var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
@@ -10722,9 +10720,9 @@ module.exports = isIndex;
 /* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsTypedArray = __webpack_require__(138),
-    baseUnary = __webpack_require__(139),
-    nodeUtil = __webpack_require__(140);
+var baseIsTypedArray = __webpack_require__(139),
+    baseUnary = __webpack_require__(140),
+    nodeUtil = __webpack_require__(141);
 
 /* Node.js helper references. */
 var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
@@ -10834,8 +10832,8 @@ module.exports = baseGet;
 
 var isArray = __webpack_require__(2),
     isKey = __webpack_require__(19),
-    stringToPath = __webpack_require__(154),
-    toString = __webpack_require__(157);
+    stringToPath = __webpack_require__(155),
+    toString = __webpack_require__(158);
 
 /**
  * Casts `value` to a path array if it's not one.
@@ -10880,7 +10878,8 @@ exports.default = function (context) {
       Promise.all(matchedComponents.map(function (Component) {
         if (Component.asyncData) {
           return Component.asyncData({
-            store: _app.store
+            store: _app.store,
+            route: _app.router.currentRoute
           });
         }
       })).then(function () {
@@ -10903,8 +10902,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.store = exports.router = exports.app = undefined;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _vue = __webpack_require__(13);
 
 var _vue2 = _interopRequireDefault(_vue);
@@ -10913,20 +10910,24 @@ var _App = __webpack_require__(49);
 
 var _App2 = _interopRequireDefault(_App);
 
-var _store = __webpack_require__(51);
+var _store = __webpack_require__(52);
 
 var _store2 = _interopRequireDefault(_store);
 
-var _router = __webpack_require__(168);
+var _router = __webpack_require__(169);
 
 var _router2 = _interopRequireDefault(_router);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var app = new _vue2.default(_extends({
+var app = new _vue2.default({
   router: _router2.default,
-  store: _store2.default
-}, _App2.default));
+  store: _store2.default,
+  render: function render(h) {
+    return h(_App2.default);
+  }
+  // ...App
+});
 
 exports.app = app;
 exports.router = _router2.default;
@@ -10939,8 +10940,13 @@ exports.store = _store2.default;
 var __vue_exports__, __vue_options__
 var __vue_styles__ = {}
 
+/* styles */
+
+/* script */
+__vue_exports__ = __webpack_require__(50)
+
 /* template */
-var __vue_template__ = __webpack_require__(50)
+var __vue_template__ = __webpack_require__(51)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -10952,9 +10958,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "D:\\github_ml\\dotnet_example\\ClientApp\\components\\App.vue"
+__vue_options__.__file = "D:\\88_github_repository\\milkmidi\\dotnet-vue-ssr-example\\ClientApp\\components\\App.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__._scopeId = "data-v-a0c3e4aa"
 if (__vue_options__.functional) {console.error("[vue-loader] App.vue: functional components are not supported and should be defined in plain js files using render functions.")}
 
 module.exports = __vue_exports__
@@ -10962,6 +10969,22 @@ module.exports = __vue_exports__
 
 /***/ }),
 /* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
+  mounted: function mounted() {
+    console.log("development");
+  }
+};
+
+/***/ }),
+/* 51 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -10969,7 +10992,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "app"
     }
-  }, [_c('h1', [_vm._v("Testing123456")]), _vm._v(" "), _c('router-link', {
+  }, [_c('div', {
+    staticClass: "container"
+  }, [_c('h1', {
+    staticClass: "h1"
+  }, [_vm._v("Dotnet Core Vue SSR Example")]), _vm._v(" "), _c('router-link', {
     staticClass: "router-link-item",
     attrs: {
       "to": "/"
@@ -10979,11 +11006,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "to": "/messages"
     }
-  }, [_vm._v("Messages")]), _vm._v(" "), _c('router-view')], 1)
+  }, [_vm._v("Messages")]), _vm._v(" "), _c('router-view')], 1)])
 },staticRenderFns: []}
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11001,9 +11028,9 @@ var _vuex = __webpack_require__(20);
 
 var _vuex2 = _interopRequireDefault(_vuex);
 
-var _actions = __webpack_require__(52);
+var _actions = __webpack_require__(53);
 
-var _minBy = __webpack_require__(84);
+var _minBy = __webpack_require__(85);
 
 var _minBy2 = _interopRequireDefault(_minBy);
 
@@ -11012,7 +11039,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _vue2.default.use(_vuex2.default);
 
 var store = new _vuex2.default.Store({
-  state: { messages: [], lastFetchedMessageDate: -1 },
+  state: {
+    messages: [],
+    lastFetchedMessageDate: -1
+  },
 
   mutations: {
     INITIAL_MESSAGES: function INITIAL_MESSAGES(state, payload) {
@@ -11043,7 +11073,7 @@ var store = new _vuex2.default.Store({
 exports.default = store;
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11054,16 +11084,21 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fetchMessages = exports.fetchInitialMessages = undefined;
 
-var _axios = __webpack_require__(53);
+var _axios = __webpack_require__(54);
 
 var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var axiosInstance = _axios2.default.create({
+  baseURL:  true ? 'http://localhost:5000' : 'https://node.medialand.tw/'
+});
+
 var fetchInitialMessages = exports.fetchInitialMessages = function fetchInitialMessages(_ref) {
   var commit = _ref.commit;
 
-  return _axios2.default.get('/initialMessages').then(function (response) {
+  // axios issus ? , need full-URI
+  return axiosInstance.get('/api/initialMessages').then(function (response) {
     commit("INITIAL_MESSAGES", response.data);
   }).catch(function (err) {
     console.log(err);
@@ -11073,7 +11108,7 @@ var fetchInitialMessages = exports.fetchInitialMessages = function fetchInitialM
 var fetchMessages = exports.fetchMessages = function fetchMessages(_ref2, lastFetchedMessageDate) {
   var commit = _ref2.commit;
 
-  _axios2.default.get('/fetchMessages?lastFetchedMessageDate=' + lastFetchedMessageDate).then(function (response) {
+  axiosInstance.get('/api/fetchMessages?lastFetchedMessageDate=' + lastFetchedMessageDate).then(function (response) {
     commit("FETCH_MESSAGES", response.data);
   }).catch(function (err) {
     console.log(err);
@@ -11081,13 +11116,13 @@ var fetchMessages = exports.fetchMessages = function fetchMessages(_ref2, lastFe
 };
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(54);
+module.exports = __webpack_require__(55);
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11095,7 +11130,7 @@ module.exports = __webpack_require__(54);
 
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(21);
-var Axios = __webpack_require__(55);
+var Axios = __webpack_require__(56);
 
 /**
  * Create an instance of Axios
@@ -11131,7 +11166,7 @@ axios.create = function create(defaultConfig) {
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(83);
+axios.spread = __webpack_require__(84);
 
 module.exports = axios;
 
@@ -11140,18 +11175,18 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var defaults = __webpack_require__(56);
+var defaults = __webpack_require__(57);
 var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(58);
-var dispatchRequest = __webpack_require__(59);
-var isAbsoluteURL = __webpack_require__(81);
-var combineURLs = __webpack_require__(82);
+var InterceptorManager = __webpack_require__(59);
+var dispatchRequest = __webpack_require__(60);
+var isAbsoluteURL = __webpack_require__(82);
+var combineURLs = __webpack_require__(83);
 
 /**
  * Create a new instance of Axios
@@ -11232,14 +11267,14 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(57);
+var normalizeHeaderName = __webpack_require__(58);
 
 var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 var DEFAULT_CONTENT_TYPE = {
@@ -11311,7 +11346,7 @@ module.exports = {
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11330,7 +11365,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11389,14 +11424,14 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(60);
+var transformData = __webpack_require__(61);
 
 /**
  * Dispatch a request to the server using whichever adapter
@@ -11437,10 +11472,10 @@ module.exports = function dispatchRequest(config) {
     adapter = config.adapter;
   } else if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(61);
+    adapter = __webpack_require__(62);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(66);
+    adapter = __webpack_require__(67);
   }
 
   return Promise.resolve(config)
@@ -11471,7 +11506,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11498,7 +11533,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11507,10 +11542,10 @@ module.exports = function transformData(data, headers, fns) {
 var utils = __webpack_require__(0);
 var settle = __webpack_require__(22);
 var buildURL = __webpack_require__(24);
-var parseHeaders = __webpack_require__(62);
-var isURLSameOrigin = __webpack_require__(63);
+var parseHeaders = __webpack_require__(63);
+var isURLSameOrigin = __webpack_require__(64);
 var createError = __webpack_require__(14);
-var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(64);
+var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(65);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -11528,7 +11563,7 @@ module.exports = function xhrAdapter(config) {
     // For IE 8/9 CORS support
     // Only supports POST and GET calls and doesn't returns the response headers.
     // DON'T do this for testing b/c XMLHttpRequest is mocked, not XDomainRequest.
-    if (process.env.NODE_ENV !== 'test' &&
+    if ("development" !== 'test' &&
         typeof window !== 'undefined' &&
         window.XDomainRequest && !('withCredentials' in request) &&
         !isURLSameOrigin(config.url)) {
@@ -11604,7 +11639,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(65);
+      var cookies = __webpack_require__(66);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -11667,7 +11702,7 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11711,7 +11746,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11786,7 +11821,7 @@ module.exports = (
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11829,7 +11864,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11889,7 +11924,7 @@ module.exports = (
 
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11903,9 +11938,9 @@ var https = __webpack_require__(26);
 var httpFollow = __webpack_require__(27).http;
 var httpsFollow = __webpack_require__(27).https;
 var url = __webpack_require__(28);
-var zlib = __webpack_require__(78);
-var pkg = __webpack_require__(79);
-var Buffer = __webpack_require__(80).Buffer;
+var zlib = __webpack_require__(79);
+var pkg = __webpack_require__(80);
+var Buffer = __webpack_require__(81).Buffer;
 var createError = __webpack_require__(14);
 var enhanceError = __webpack_require__(23);
 
@@ -11977,7 +12012,7 @@ module.exports = function httpAdapter(config) {
     var proxy = config.proxy;
     if (!proxy) {
       var proxyEnv = parsed.protocol.slice(0, -1) + '_proxy';
-      var proxyUrl = process.env[proxyEnv] || process.env[proxyEnv.toUpperCase()];
+      var proxyUrl = Object({"NODE_ENV":"development"})[proxyEnv] || Object({"NODE_ENV":"development"})[proxyEnv.toUpperCase()];
       if (proxyUrl) {
         var parsedProxyUrl = url.parse(proxyUrl);
         proxy = {
@@ -12091,15 +12126,15 @@ module.exports = function httpAdapter(config) {
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var url = __webpack_require__(28);
-var debug = __webpack_require__(68)('follow-redirects');
-var assert = __webpack_require__(76);
-var consume = __webpack_require__(77);
+var debug = __webpack_require__(69)('follow-redirects');
+var assert = __webpack_require__(77);
+var consume = __webpack_require__(78);
 
 module.exports = function(_nativeProtocols) {
   var nativeProtocols = {};
@@ -12260,7 +12295,7 @@ var urlProps = ['protocol', 'slashes', 'auth', 'host', 'port', 'hostname',
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -12269,14 +12304,14 @@ var urlProps = ['protocol', 'slashes', 'auth', 'host', 'port', 'hostname',
  */
 
 if (typeof process !== 'undefined' && process.type === 'renderer') {
-  module.exports = __webpack_require__(69);
+  module.exports = __webpack_require__(70);
 } else {
-  module.exports = __webpack_require__(71);
+  module.exports = __webpack_require__(72);
 }
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -12436,7 +12471,7 @@ function load() {
 
   // If debug isn't set in LS, and we're in Electron, try to load $DEBUG
   if (!r && typeof process !== 'undefined' && 'env' in process) {
-    r = process.env.DEBUG;
+    r = Object({"NODE_ENV":"development"}).DEBUG;
   }
 
   return r;
@@ -12467,7 +12502,7 @@ function localstorage() {
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports) {
 
 /**
@@ -12625,15 +12660,15 @@ function plural(ms, n, name) {
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
  * Module dependencies.
  */
 
-var tty = __webpack_require__(72);
-var util = __webpack_require__(73);
+var tty = __webpack_require__(73);
+var util = __webpack_require__(74);
 
 /**
  * This is the Node.js implementation of `debug()`.
@@ -12661,7 +12696,7 @@ exports.colors = [6, 2, 3, 4, 5, 1];
  *   $ DEBUG_COLORS=no DEBUG_DEPTH=10 DEBUG_SHOW_HIDDEN=enabled node script.js
  */
 
-exports.inspectOpts = Object.keys(process.env).filter(function (key) {
+exports.inspectOpts = Object.keys(Object({"NODE_ENV":"development"})).filter(function (key) {
   return /^debug_/i.test(key);
 }).reduce(function (obj, key) {
   // camel-case
@@ -12671,7 +12706,7 @@ exports.inspectOpts = Object.keys(process.env).filter(function (key) {
     .replace(/_([a-z])/g, function (_, k) { return k.toUpperCase() });
 
   // coerce string value into JS value
-  var val = process.env[key];
+  var val = Object({"NODE_ENV":"development"})[key];
   if (/^(yes|on|true|enabled)$/i.test(val)) val = true;
   else if (/^(no|off|false|disabled)$/i.test(val)) val = false;
   else if (val === 'null') val = null;
@@ -12688,7 +12723,7 @@ exports.inspectOpts = Object.keys(process.env).filter(function (key) {
  *   $ DEBUG_FD=3 node script.js 3>debug.log
  */
 
-var fd = parseInt(process.env.DEBUG_FD, 10) || 2;
+var fd = parseInt(Object({"NODE_ENV":"development"}).DEBUG_FD, 10) || 2;
 
 if (1 !== fd && 2 !== fd) {
   util.deprecate(function(){}, 'except for stderr(2) and stdout(1), any other usage of DEBUG_FD is deprecated. Override debug.log if you want to use a different log function (https://git.io/debug_fd)')()
@@ -12770,9 +12805,9 @@ function save(namespaces) {
   if (null == namespaces) {
     // If you set a process.env field to null or undefined, it gets cast to the
     // string 'null' or 'undefined'. Just delete instead.
-    delete process.env.DEBUG;
+    delete Object({"NODE_ENV":"development"}).DEBUG;
   } else {
-    process.env.DEBUG = namespaces;
+    Object({"NODE_ENV":"development"}).DEBUG = namespaces;
   }
 }
 
@@ -12784,7 +12819,7 @@ function save(namespaces) {
  */
 
 function load() {
-  return process.env.DEBUG;
+  return Object({"NODE_ENV":"development"}).DEBUG;
 }
 
 /**
@@ -12813,14 +12848,14 @@ function createWritableStdioStream (fd) {
       break;
 
     case 'FILE':
-      var fs = __webpack_require__(74);
+      var fs = __webpack_require__(75);
       stream = new fs.SyncWriteStream(fd, { autoClose: false });
       stream._type = 'fs';
       break;
 
     case 'PIPE':
     case 'TCP':
-      var net = __webpack_require__(75);
+      var net = __webpack_require__(76);
       stream = new net.Socket({
         fd: fd,
         readable: false,
@@ -12879,37 +12914,37 @@ exports.enable(load());
 
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports) {
 
 module.exports = require("tty");
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports) {
 
 module.exports = require("util");
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports) {
 
 module.exports = require("fs");
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports) {
 
 module.exports = require("net");
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports) {
 
 module.exports = require("assert");
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports) {
 
 module.exports = function(stream) {
@@ -12929,25 +12964,25 @@ module.exports = function(stream) {
 
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports) {
 
 module.exports = require("zlib");
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports) {
 
-module.exports = {"_from":"axios@^0.14.0","_id":"axios@0.14.0","_inBundle":false,"_integrity":"sha1-QPJPL06RO5+qQ9OnsuQKuHKa+pA=","_location":"/axios","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"axios@^0.14.0","name":"axios","escapedName":"axios","rawSpec":"^0.14.0","saveSpec":null,"fetchSpec":"^0.14.0"},"_requiredBy":["/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.14.0.tgz","_shasum":"40f24f2f4e913b9faa43d3a7b2e40ab8729afa90","_spec":"axios@^0.14.0","_where":"D:\\github_ml\\dotnet_example","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/mzabriskie/axios/issues"},"bundleDependencies":false,"dependencies":{"follow-redirects":"0.0.7"},"deprecated":false,"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^2.11.9","es6-promise":"^3.2.1","grunt":"0.4.5","grunt-banner":"0.6.0","grunt-cli":"0.1.13","grunt-contrib-clean":"1.0.0","grunt-contrib-nodeunit":"1.0.0","grunt-contrib-watch":"0.6.1","grunt-eslint":"18.0.0","grunt-karma":"0.12.1","grunt-ts":"5.3.2","grunt-typings":"0.1.5","grunt-webpack":"1.0.11","istanbul-instrumenter-loader":"^0.2.0","jasmine-core":"^2.4.1","karma":"^0.13.22","karma-chrome-launcher":"^1.0.1","karma-coverage":"^1.0.0","karma-firefox-launcher":"^1.0.0","karma-jasmine":"^1.0.2","karma-jasmine-ajax":"^0.1.13","karma-opera-launcher":"^1.0.0","karma-phantomjs-launcher":"^1.0.0","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^1.0.0","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.7","karma-webpack":"^1.7.0","load-grunt-tasks":"3.4.1","minimist":"^1.2.0","phantomjs-prebuilt":"^2.1.7","sinon":"^1.17.4","url-search-params":"^0.5.0","webpack":"^1.13.1","webpack-dev-server":"^1.14.1"},"homepage":"https://github.com/mzabriskie/axios","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/mzabriskie/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./axios.d.ts","version":"0.14.0"}
+module.exports = {"_args":[["axios@^0.14.0","D:\\88_github_repository\\milkmidi\\dotnet-vue-ssr-example"]],"_from":"axios@>=0.14.0-0 <0.15.0-0","_id":"axios@0.14.0","_inCache":true,"_location":"/axios","_nodeVersion":"6.2.2","_npmOperationalInternal":{"host":"packages-16-east.internal.npmjs.com","tmp":"tmp/axios-0.14.0.tgz_1472322619923_0.0996575120370835"},"_npmUser":{"email":"nick.uraltsev@gmail.com","name":"nickuraltsev"},"_npmVersion":"3.9.5","_phantomChildren":{},"_requested":{"name":"axios","raw":"axios@^0.14.0","rawSpec":"^0.14.0","scope":null,"spec":">=0.14.0-0 <0.15.0-0","type":"range"},"_requiredBy":["/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.14.0.tgz","_shasum":"40f24f2f4e913b9faa43d3a7b2e40ab8729afa90","_shrinkwrap":null,"_spec":"axios@^0.14.0","_where":"D:\\88_github_repository\\milkmidi\\dotnet-vue-ssr-example","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/mzabriskie/axios/issues"},"dependencies":{"follow-redirects":"0.0.7"},"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^2.11.9","es6-promise":"^3.2.1","grunt":"0.4.5","grunt-banner":"0.6.0","grunt-cli":"0.1.13","grunt-contrib-clean":"1.0.0","grunt-contrib-nodeunit":"1.0.0","grunt-contrib-watch":"0.6.1","grunt-eslint":"18.0.0","grunt-karma":"0.12.1","grunt-ts":"5.3.2","grunt-typings":"0.1.5","grunt-webpack":"1.0.11","istanbul-instrumenter-loader":"^0.2.0","jasmine-core":"^2.4.1","karma":"^0.13.22","karma-chrome-launcher":"^1.0.1","karma-coverage":"^1.0.0","karma-firefox-launcher":"^1.0.0","karma-jasmine":"^1.0.2","karma-jasmine-ajax":"^0.1.13","karma-opera-launcher":"^1.0.0","karma-phantomjs-launcher":"^1.0.0","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^1.0.0","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.7","karma-webpack":"^1.7.0","load-grunt-tasks":"3.4.1","minimist":"^1.2.0","phantomjs-prebuilt":"^2.1.7","sinon":"^1.17.4","url-search-params":"^0.5.0","webpack":"^1.13.1","webpack-dev-server":"^1.14.1"},"directories":{},"dist":{"shasum":"40f24f2f4e913b9faa43d3a7b2e40ab8729afa90","tarball":"https://registry.npmjs.org/axios/-/axios-0.14.0.tgz"},"gitHead":"c96348660dacddd32676924d4f1bde535c45fb77","homepage":"https://github.com/mzabriskie/axios","installable":true,"keywords":["ajax","http","node","promise","xhr"],"license":"MIT","main":"index.js","maintainers":[{"name":"mzabriskie","email":"mzabriskie@gmail.com"},{"name":"nickuraltsev","email":"nick.uraltsev@gmail.com"}],"name":"axios","optionalDependencies":{},"repository":{"type":"git","url":"git+https://github.com/mzabriskie/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./axios.d.ts","version":"0.14.0"}
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports) {
 
 module.exports = require("buffer");
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12968,7 +13003,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12987,7 +13022,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13021,12 +13056,12 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseExtremum = __webpack_require__(85),
-    baseIteratee = __webpack_require__(88),
-    baseLt = __webpack_require__(167);
+var baseExtremum = __webpack_require__(86),
+    baseIteratee = __webpack_require__(89),
+    baseLt = __webpack_require__(168);
 
 /**
  * This method is like `_.min` except that it accepts `iteratee` which is
@@ -13061,7 +13096,7 @@ module.exports = minBy;
 
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isSymbol = __webpack_require__(6);
@@ -13099,7 +13134,7 @@ module.exports = baseExtremum;
 
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Symbol = __webpack_require__(7);
@@ -13151,7 +13186,7 @@ module.exports = getRawTag;
 
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports) {
 
 /** Used for built-in method references. */
@@ -13179,14 +13214,14 @@ module.exports = objectToString;
 
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseMatches = __webpack_require__(89),
-    baseMatchesProperty = __webpack_require__(152),
-    identity = __webpack_require__(163),
+var baseMatches = __webpack_require__(90),
+    baseMatchesProperty = __webpack_require__(153),
+    identity = __webpack_require__(164),
     isArray = __webpack_require__(2),
-    property = __webpack_require__(164);
+    property = __webpack_require__(165);
 
 /**
  * The base implementation of `_.iteratee`.
@@ -13216,11 +13251,11 @@ module.exports = baseIteratee;
 
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsMatch = __webpack_require__(90),
-    getMatchData = __webpack_require__(151),
+var baseIsMatch = __webpack_require__(91),
+    getMatchData = __webpack_require__(152),
     matchesStrictComparable = __webpack_require__(44);
 
 /**
@@ -13244,7 +13279,7 @@ module.exports = baseMatches;
 
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Stack = __webpack_require__(31),
@@ -13312,7 +13347,7 @@ module.exports = baseIsMatch;
 
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports) {
 
 /**
@@ -13331,7 +13366,7 @@ module.exports = listCacheClear;
 
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var assocIndexOf = __webpack_require__(9);
@@ -13372,7 +13407,7 @@ module.exports = listCacheDelete;
 
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var assocIndexOf = __webpack_require__(9);
@@ -13397,7 +13432,7 @@ module.exports = listCacheGet;
 
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var assocIndexOf = __webpack_require__(9);
@@ -13419,7 +13454,7 @@ module.exports = listCacheHas;
 
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var assocIndexOf = __webpack_require__(9);
@@ -13451,7 +13486,7 @@ module.exports = listCacheSet;
 
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ListCache = __webpack_require__(8);
@@ -13472,7 +13507,7 @@ module.exports = stackClear;
 
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports) {
 
 /**
@@ -13496,7 +13531,7 @@ module.exports = stackDelete;
 
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports) {
 
 /**
@@ -13516,7 +13551,7 @@ module.exports = stackGet;
 
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports) {
 
 /**
@@ -13536,7 +13571,7 @@ module.exports = stackHas;
 
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ListCache = __webpack_require__(8),
@@ -13576,11 +13611,11 @@ module.exports = stackSet;
 
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isFunction = __webpack_require__(33),
-    isMasked = __webpack_require__(102),
+    isMasked = __webpack_require__(103),
     isObject = __webpack_require__(16),
     toSource = __webpack_require__(34);
 
@@ -13629,10 +13664,10 @@ module.exports = baseIsNative;
 
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var coreJsData = __webpack_require__(103);
+var coreJsData = __webpack_require__(104);
 
 /** Used to detect methods masquerading as native. */
 var maskSrcKey = (function() {
@@ -13655,7 +13690,7 @@ module.exports = isMasked;
 
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var root = __webpack_require__(1);
@@ -13667,7 +13702,7 @@ module.exports = coreJsData;
 
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports) {
 
 /**
@@ -13686,10 +13721,10 @@ module.exports = getValue;
 
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Hash = __webpack_require__(106),
+var Hash = __webpack_require__(107),
     ListCache = __webpack_require__(8),
     Map = __webpack_require__(15);
 
@@ -13713,14 +13748,14 @@ module.exports = mapCacheClear;
 
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var hashClear = __webpack_require__(107),
-    hashDelete = __webpack_require__(108),
-    hashGet = __webpack_require__(109),
-    hashHas = __webpack_require__(110),
-    hashSet = __webpack_require__(111);
+var hashClear = __webpack_require__(108),
+    hashDelete = __webpack_require__(109),
+    hashGet = __webpack_require__(110),
+    hashHas = __webpack_require__(111),
+    hashSet = __webpack_require__(112);
 
 /**
  * Creates a hash object.
@@ -13751,7 +13786,7 @@ module.exports = Hash;
 
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var nativeCreate = __webpack_require__(10);
@@ -13772,7 +13807,7 @@ module.exports = hashClear;
 
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports) {
 
 /**
@@ -13795,7 +13830,7 @@ module.exports = hashDelete;
 
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var nativeCreate = __webpack_require__(10);
@@ -13831,7 +13866,7 @@ module.exports = hashGet;
 
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var nativeCreate = __webpack_require__(10);
@@ -13860,7 +13895,7 @@ module.exports = hashHas;
 
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var nativeCreate = __webpack_require__(10);
@@ -13889,7 +13924,7 @@ module.exports = hashSet;
 
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getMapData = __webpack_require__(11);
@@ -13913,7 +13948,7 @@ module.exports = mapCacheDelete;
 
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports) {
 
 /**
@@ -13934,7 +13969,7 @@ module.exports = isKeyable;
 
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getMapData = __webpack_require__(11);
@@ -13956,7 +13991,7 @@ module.exports = mapCacheGet;
 
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getMapData = __webpack_require__(11);
@@ -13978,7 +14013,7 @@ module.exports = mapCacheHas;
 
 
 /***/ }),
-/* 116 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getMapData = __webpack_require__(11);
@@ -14006,14 +14041,14 @@ module.exports = mapCacheSet;
 
 
 /***/ }),
-/* 117 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Stack = __webpack_require__(31),
     equalArrays = __webpack_require__(36),
-    equalByTag = __webpack_require__(123),
-    equalObjects = __webpack_require__(127),
-    getTag = __webpack_require__(146),
+    equalByTag = __webpack_require__(124),
+    equalObjects = __webpack_require__(128),
+    getTag = __webpack_require__(147),
     isArray = __webpack_require__(2),
     isBuffer = __webpack_require__(39),
     isTypedArray = __webpack_require__(42);
@@ -14095,12 +14130,12 @@ module.exports = baseIsEqualDeep;
 
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var MapCache = __webpack_require__(17),
-    setCacheAdd = __webpack_require__(119),
-    setCacheHas = __webpack_require__(120);
+    setCacheAdd = __webpack_require__(120),
+    setCacheHas = __webpack_require__(121);
 
 /**
  *
@@ -14128,7 +14163,7 @@ module.exports = SetCache;
 
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, exports) {
 
 /** Used to stand-in for `undefined` hash values. */
@@ -14153,7 +14188,7 @@ module.exports = setCacheAdd;
 
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, exports) {
 
 /**
@@ -14173,7 +14208,7 @@ module.exports = setCacheHas;
 
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, exports) {
 
 /**
@@ -14202,7 +14237,7 @@ module.exports = arraySome;
 
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports) {
 
 /**
@@ -14221,15 +14256,15 @@ module.exports = cacheHas;
 
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Symbol = __webpack_require__(7),
-    Uint8Array = __webpack_require__(124),
+    Uint8Array = __webpack_require__(125),
     eq = __webpack_require__(32),
     equalArrays = __webpack_require__(36),
-    mapToArray = __webpack_require__(125),
-    setToArray = __webpack_require__(126);
+    mapToArray = __webpack_require__(126),
+    setToArray = __webpack_require__(127);
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1,
@@ -14339,7 +14374,7 @@ module.exports = equalByTag;
 
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var root = __webpack_require__(1);
@@ -14351,7 +14386,7 @@ module.exports = Uint8Array;
 
 
 /***/ }),
-/* 125 */
+/* 126 */
 /***/ (function(module, exports) {
 
 /**
@@ -14375,7 +14410,7 @@ module.exports = mapToArray;
 
 
 /***/ }),
-/* 126 */
+/* 127 */
 /***/ (function(module, exports) {
 
 /**
@@ -14399,10 +14434,10 @@ module.exports = setToArray;
 
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getAllKeys = __webpack_require__(128);
+var getAllKeys = __webpack_require__(129);
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1;
@@ -14494,11 +14529,11 @@ module.exports = equalObjects;
 
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseGetAllKeys = __webpack_require__(129),
-    getSymbols = __webpack_require__(131),
+var baseGetAllKeys = __webpack_require__(130),
+    getSymbols = __webpack_require__(132),
     keys = __webpack_require__(37);
 
 /**
@@ -14516,10 +14551,10 @@ module.exports = getAllKeys;
 
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayPush = __webpack_require__(130),
+var arrayPush = __webpack_require__(131),
     isArray = __webpack_require__(2);
 
 /**
@@ -14542,7 +14577,7 @@ module.exports = baseGetAllKeys;
 
 
 /***/ }),
-/* 130 */
+/* 131 */
 /***/ (function(module, exports) {
 
 /**
@@ -14568,11 +14603,11 @@ module.exports = arrayPush;
 
 
 /***/ }),
-/* 131 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayFilter = __webpack_require__(132),
-    stubArray = __webpack_require__(133);
+var arrayFilter = __webpack_require__(133),
+    stubArray = __webpack_require__(134);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -14604,7 +14639,7 @@ module.exports = getSymbols;
 
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, exports) {
 
 /**
@@ -14635,7 +14670,7 @@ module.exports = arrayFilter;
 
 
 /***/ }),
-/* 133 */
+/* 134 */
 /***/ (function(module, exports) {
 
 /**
@@ -14664,10 +14699,10 @@ module.exports = stubArray;
 
 
 /***/ }),
-/* 134 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseTimes = __webpack_require__(135),
+var baseTimes = __webpack_require__(136),
     isArguments = __webpack_require__(38),
     isArray = __webpack_require__(2),
     isBuffer = __webpack_require__(39),
@@ -14719,7 +14754,7 @@ module.exports = arrayLikeKeys;
 
 
 /***/ }),
-/* 135 */
+/* 136 */
 /***/ (function(module, exports) {
 
 /**
@@ -14745,7 +14780,7 @@ module.exports = baseTimes;
 
 
 /***/ }),
-/* 136 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGetTag = __webpack_require__(4),
@@ -14769,7 +14804,7 @@ module.exports = baseIsArguments;
 
 
 /***/ }),
-/* 137 */
+/* 138 */
 /***/ (function(module, exports) {
 
 /**
@@ -14793,7 +14828,7 @@ module.exports = stubFalse;
 
 
 /***/ }),
-/* 138 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGetTag = __webpack_require__(4),
@@ -14859,7 +14894,7 @@ module.exports = baseIsTypedArray;
 
 
 /***/ }),
-/* 139 */
+/* 140 */
 /***/ (function(module, exports) {
 
 /**
@@ -14879,7 +14914,7 @@ module.exports = baseUnary;
 
 
 /***/ }),
-/* 140 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {var freeGlobal = __webpack_require__(30);
@@ -14916,11 +14951,11 @@ module.exports = nodeUtil;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(40)(module)))
 
 /***/ }),
-/* 141 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isPrototype = __webpack_require__(142),
-    nativeKeys = __webpack_require__(143);
+var isPrototype = __webpack_require__(143),
+    nativeKeys = __webpack_require__(144);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -14952,7 +14987,7 @@ module.exports = baseKeys;
 
 
 /***/ }),
-/* 142 */
+/* 143 */
 /***/ (function(module, exports) {
 
 /** Used for built-in method references. */
@@ -14976,10 +15011,10 @@ module.exports = isPrototype;
 
 
 /***/ }),
-/* 143 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var overArg = __webpack_require__(144);
+var overArg = __webpack_require__(145);
 
 /* Built-in method references for those with the same name as other `lodash` methods. */
 var nativeKeys = overArg(Object.keys, Object);
@@ -14988,7 +15023,7 @@ module.exports = nativeKeys;
 
 
 /***/ }),
-/* 144 */
+/* 145 */
 /***/ (function(module, exports) {
 
 /**
@@ -15009,7 +15044,7 @@ module.exports = overArg;
 
 
 /***/ }),
-/* 145 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isFunction = __webpack_require__(33),
@@ -15048,14 +15083,14 @@ module.exports = isArrayLike;
 
 
 /***/ }),
-/* 146 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var DataView = __webpack_require__(147),
+var DataView = __webpack_require__(148),
     Map = __webpack_require__(15),
-    Promise = __webpack_require__(148),
-    Set = __webpack_require__(149),
-    WeakMap = __webpack_require__(150),
+    Promise = __webpack_require__(149),
+    Set = __webpack_require__(150),
+    WeakMap = __webpack_require__(151),
     baseGetTag = __webpack_require__(4),
     toSource = __webpack_require__(34);
 
@@ -15112,7 +15147,7 @@ module.exports = getTag;
 
 
 /***/ }),
-/* 147 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(3),
@@ -15125,7 +15160,7 @@ module.exports = DataView;
 
 
 /***/ }),
-/* 148 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(3),
@@ -15138,7 +15173,7 @@ module.exports = Promise;
 
 
 /***/ }),
-/* 149 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(3),
@@ -15151,7 +15186,7 @@ module.exports = Set;
 
 
 /***/ }),
-/* 150 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(3),
@@ -15164,7 +15199,7 @@ module.exports = WeakMap;
 
 
 /***/ }),
-/* 151 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isStrictComparable = __webpack_require__(43),
@@ -15194,12 +15229,12 @@ module.exports = getMatchData;
 
 
 /***/ }),
-/* 152 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseIsEqual = __webpack_require__(35),
-    get = __webpack_require__(153),
-    hasIn = __webpack_require__(160),
+    get = __webpack_require__(154),
+    hasIn = __webpack_require__(161),
     isKey = __webpack_require__(19),
     isStrictComparable = __webpack_require__(43),
     matchesStrictComparable = __webpack_require__(44),
@@ -15233,7 +15268,7 @@ module.exports = baseMatchesProperty;
 
 
 /***/ }),
-/* 153 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGet = __webpack_require__(45);
@@ -15272,10 +15307,10 @@ module.exports = get;
 
 
 /***/ }),
-/* 154 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var memoizeCapped = __webpack_require__(155);
+var memoizeCapped = __webpack_require__(156);
 
 /** Used to match property names within property paths. */
 var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
@@ -15305,10 +15340,10 @@ module.exports = stringToPath;
 
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var memoize = __webpack_require__(156);
+var memoize = __webpack_require__(157);
 
 /** Used as the maximum memoize cache size. */
 var MAX_MEMOIZE_SIZE = 500;
@@ -15337,7 +15372,7 @@ module.exports = memoizeCapped;
 
 
 /***/ }),
-/* 156 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var MapCache = __webpack_require__(17);
@@ -15416,10 +15451,10 @@ module.exports = memoize;
 
 
 /***/ }),
-/* 157 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseToString = __webpack_require__(158);
+var baseToString = __webpack_require__(159);
 
 /**
  * Converts `value` to a string. An empty string is returned for `null`
@@ -15450,11 +15485,11 @@ module.exports = toString;
 
 
 /***/ }),
-/* 158 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Symbol = __webpack_require__(7),
-    arrayMap = __webpack_require__(159),
+    arrayMap = __webpack_require__(160),
     isArray = __webpack_require__(2),
     isSymbol = __webpack_require__(6);
 
@@ -15493,7 +15528,7 @@ module.exports = baseToString;
 
 
 /***/ }),
-/* 159 */
+/* 160 */
 /***/ (function(module, exports) {
 
 /**
@@ -15520,11 +15555,11 @@ module.exports = arrayMap;
 
 
 /***/ }),
-/* 160 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseHasIn = __webpack_require__(161),
-    hasPath = __webpack_require__(162);
+var baseHasIn = __webpack_require__(162),
+    hasPath = __webpack_require__(163);
 
 /**
  * Checks if `path` is a direct or inherited property of `object`.
@@ -15560,7 +15595,7 @@ module.exports = hasIn;
 
 
 /***/ }),
-/* 161 */
+/* 162 */
 /***/ (function(module, exports) {
 
 /**
@@ -15579,7 +15614,7 @@ module.exports = baseHasIn;
 
 
 /***/ }),
-/* 162 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var castPath = __webpack_require__(46),
@@ -15624,7 +15659,7 @@ module.exports = hasPath;
 
 
 /***/ }),
-/* 163 */
+/* 164 */
 /***/ (function(module, exports) {
 
 /**
@@ -15651,11 +15686,11 @@ module.exports = identity;
 
 
 /***/ }),
-/* 164 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseProperty = __webpack_require__(165),
-    basePropertyDeep = __webpack_require__(166),
+var baseProperty = __webpack_require__(166),
+    basePropertyDeep = __webpack_require__(167),
     isKey = __webpack_require__(19),
     toKey = __webpack_require__(12);
 
@@ -15689,7 +15724,7 @@ module.exports = property;
 
 
 /***/ }),
-/* 165 */
+/* 166 */
 /***/ (function(module, exports) {
 
 /**
@@ -15709,7 +15744,7 @@ module.exports = baseProperty;
 
 
 /***/ }),
-/* 166 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGet = __webpack_require__(45);
@@ -15731,7 +15766,7 @@ module.exports = basePropertyDeep;
 
 
 /***/ }),
-/* 167 */
+/* 168 */
 /***/ (function(module, exports) {
 
 /**
@@ -15751,7 +15786,7 @@ module.exports = baseLt;
 
 
 /***/ }),
-/* 168 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15765,15 +15800,15 @@ var _vue = __webpack_require__(13);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vueRouter = __webpack_require__(169);
+var _vueRouter = __webpack_require__(170);
 
 var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
-var _Dashboard = __webpack_require__(170);
+var _Dashboard = __webpack_require__(171);
 
 var _Dashboard2 = _interopRequireDefault(_Dashboard);
 
-var _Messages = __webpack_require__(172);
+var _Messages = __webpack_require__(173);
 
 var _Messages2 = _interopRequireDefault(_Messages);
 
@@ -15789,7 +15824,7 @@ var router = new _vueRouter2.default({
 exports.default = router;
 
 /***/ }),
-/* 169 */
+/* 170 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15808,7 +15843,7 @@ function assert (condition, message) {
 }
 
 function warn (condition, message) {
-  if (process.env.NODE_ENV !== 'production' && !condition) {
+  if ("development" !== 'production' && !condition) {
     typeof console !== 'undefined' && console.warn(("[vue-router] " + message));
   }
 }
@@ -15919,7 +15954,7 @@ function resolveProps (route, config) {
     case 'boolean':
       return config ? route.params : undefined
     default:
-      if (process.env.NODE_ENV !== 'production') {
+      if (true) {
         warn(
           false,
           "props in \"" + (route.path) + "\" is a " + (typeof config) + ", " +
@@ -15963,7 +15998,7 @@ function resolveQuery (
   try {
     parsedQuery = parse(query || '');
   } catch (e) {
-    process.env.NODE_ENV !== 'production' && warn(false, e.message);
+    "development" !== 'production' && warn(false, e.message);
     parsedQuery = {};
   }
   for (var key in extraQuery) {
@@ -16886,7 +16921,7 @@ function fillParams (
       (regexpCompileCache[path] = pathToRegexp_1.compile(path));
     return filler(params || {}, { pretty: true })
   } catch (e) {
-    if (process.env.NODE_ENV !== 'production') {
+    if (true) {
       warn(false, ("missing param for " + routeMsg + ": " + (e.message)));
     }
     return ''
@@ -16938,7 +16973,7 @@ function addRouteRecord (
 ) {
   var path = route.path;
   var name = route.name;
-  if (process.env.NODE_ENV !== 'production') {
+  if (true) {
     assert(path != null, "\"path\" is required in a route configuration.");
     assert(
       typeof route.component !== 'string',
@@ -16980,7 +17015,7 @@ function addRouteRecord (
     // Warn if route is named, does not redirect and has a default child route.
     // If users navigate to this route by name, the default child will
     // not be rendered (GH Issue #629)
-    if (process.env.NODE_ENV !== 'production') {
+    if (true) {
       if (route.name && !route.redirect && route.children.some(function (child) { return /^\/?$/.test(child.path); })) {
         warn(
           false,
@@ -17029,7 +17064,7 @@ function addRouteRecord (
   if (name) {
     if (!nameMap[name]) {
       nameMap[name] = record;
-    } else if (process.env.NODE_ENV !== 'production' && !matchAs) {
+    } else if ("development" !== 'production' && !matchAs) {
       warn(
         false,
         "Duplicate named routes definition: " +
@@ -17041,7 +17076,7 @@ function addRouteRecord (
 
 function compileRouteRegex (path, pathToRegexpOptions) {
   var regex = pathToRegexp_1(path, [], pathToRegexpOptions);
-  if (process.env.NODE_ENV !== 'production') {
+  if (true) {
     var keys = Object.create(null);
     regex.keys.forEach(function (key) {
       warn(!keys[key.name], ("Duplicate param keys in route with path: \"" + path + "\""));
@@ -17084,7 +17119,7 @@ function normalizeLocation (
     } else if (current.matched.length) {
       var rawPath = current.matched[current.matched.length - 1].path;
       next.path = fillParams(rawPath, params, ("path " + (current.path)));
-    } else if (process.env.NODE_ENV !== 'production') {
+    } else if (true) {
       warn(false, "relative params navigation requires a current route.");
     }
     return next
@@ -17148,7 +17183,7 @@ function createMatcher (
 
     if (name) {
       var record = nameMap[name];
-      if (process.env.NODE_ENV !== 'production') {
+      if (true) {
         warn(record, ("Route with name '" + name + "' does not exist"));
       }
       if (!record) { return _createRoute(null, location) }
@@ -17200,7 +17235,7 @@ function createMatcher (
     }
 
     if (!redirect || typeof redirect !== 'object') {
-      if (process.env.NODE_ENV !== 'production') {
+      if (true) {
         warn(
           false, ("invalid redirect option: " + (JSON.stringify(redirect)))
         );
@@ -17221,7 +17256,7 @@ function createMatcher (
     if (name) {
       // resolved named direct
       var targetRecord = nameMap[name];
-      if (process.env.NODE_ENV !== 'production') {
+      if (true) {
         assert(targetRecord, ("redirect failed: named route \"" + name + "\" not found."));
       }
       return match({
@@ -17244,7 +17279,7 @@ function createMatcher (
         hash: hash
       }, undefined, location)
     } else {
-      if (process.env.NODE_ENV !== 'production') {
+      if (true) {
         warn(false, ("invalid redirect option: " + (JSON.stringify(redirect))));
       }
       return _createRoute(null, location)
@@ -17349,7 +17384,7 @@ function handleScroll (
     return
   }
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (true) {
     assert(typeof behavior === 'function', "scrollBehavior must be a function");
   }
 
@@ -17366,7 +17401,7 @@ function handleScroll (
       shouldScroll.then(function (shouldScroll) {
         scrollToPosition((shouldScroll), position);
       }).catch(function (err) {
-        if (process.env.NODE_ENV !== 'production') {
+        if (true) {
           assert(false, err.toString());
         }
       });
@@ -17556,7 +17591,7 @@ function resolveAsyncComponents (matched) {
 
         var reject = once(function (reason) {
           var msg = "Failed to resolve async component " + key + ": " + reason;
-          process.env.NODE_ENV !== 'production' && warn(false, msg);
+          "development" !== 'production' && warn(false, msg);
           if (!error) {
             error = isError(reason)
               ? reason
@@ -18246,7 +18281,7 @@ var VueRouter = function VueRouter (options) {
       this.history = new AbstractHistory(this, options.base);
       break
     default:
-      if (process.env.NODE_ENV !== 'production') {
+      if (true) {
         assert(false, ("invalid mode: " + mode));
       }
   }
@@ -18269,7 +18304,7 @@ prototypeAccessors.currentRoute.get = function () {
 VueRouter.prototype.init = function init (app /* Vue component instance */) {
     var this$1 = this;
 
-  process.env.NODE_ENV !== 'production' && assert(
+  "development" !== 'production' && assert(
     install.installed,
     "not installed. Make sure to call `Vue.use(VueRouter)` " +
     "before creating root instance."
@@ -18420,7 +18455,7 @@ if (inBrowser && window.Vue) {
 
 
 /***/ }),
-/* 170 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
@@ -18429,7 +18464,7 @@ var __vue_styles__ = {}
 /* styles */
 
 /* template */
-var __vue_template__ = __webpack_require__(171)
+var __vue_template__ = __webpack_require__(172)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -18441,35 +18476,37 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "D:\\github_ml\\dotnet_example\\ClientApp\\components\\Dashboard.vue"
+__vue_options__.__file = "D:\\88_github_repository\\milkmidi\\dotnet-vue-ssr-example\\ClientApp\\components\\Dashboard.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-77e9a9b8"
+__vue_options__._scopeId = "data-v-6743af1e"
 if (__vue_options__.functional) {console.error("[vue-loader] Dashboard.vue: functional components are not supported and should be defined in plain js files using render functions.")}
 
 module.exports = __vue_exports__
 
 
 /***/ }),
-/* 171 */
+/* 172 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('h1', [_vm._v("Dashboard 你好123123456")])
+  return _c('h1', [_vm._v("Dashboard 你好")])
 },staticRenderFns: []}
 
 /***/ }),
-/* 172 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = {}
 
+/* styles */
+
 /* script */
-__vue_exports__ = __webpack_require__(173)
+__vue_exports__ = __webpack_require__(174)
 
 /* template */
-var __vue_template__ = __webpack_require__(177)
+var __vue_template__ = __webpack_require__(178)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -18481,16 +18518,17 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "D:\\github_ml\\dotnet_example\\ClientApp\\components\\Messages.vue"
+__vue_options__.__file = "D:\\88_github_repository\\milkmidi\\dotnet-vue-ssr-example\\ClientApp\\components\\Messages.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__._scopeId = "data-v-1c186bb2"
 if (__vue_options__.functional) {console.error("[vue-loader] Messages.vue: functional components are not supported and should be defined in plain js files using render functions.")}
 
 module.exports = __vue_exports__
 
 
 /***/ }),
-/* 173 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18502,12 +18540,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _vuex = __webpack_require__(20);
 
-var _Message = __webpack_require__(174);
+var _Message = __webpack_require__(175);
 
 var _Message2 = _interopRequireDefault(_Message);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
 //
 //
 //
@@ -18525,13 +18564,15 @@ exports.default = {
 
   computed: (0, _vuex.mapGetters)(['messages', 'lastFetchedMessageDate']),
   methods: (0, _vuex.mapActions)(['fetchMessages']),
+  mounted: function mounted() {},
+
   components: {
     Message: _Message2.default
   }
 };
 
 /***/ }),
-/* 174 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
@@ -18540,10 +18581,10 @@ var __vue_styles__ = {}
 /* styles */
 
 /* script */
-__vue_exports__ = __webpack_require__(175)
+__vue_exports__ = __webpack_require__(176)
 
 /* template */
-var __vue_template__ = __webpack_require__(176)
+var __vue_template__ = __webpack_require__(177)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -18555,17 +18596,17 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "D:\\github_ml\\dotnet_example\\ClientApp\\components\\Message.vue"
+__vue_options__.__file = "D:\\88_github_repository\\milkmidi\\dotnet-vue-ssr-example\\ClientApp\\components\\Message.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-39d000ab"
+__vue_options__._scopeId = "data-v-3a982791"
 if (__vue_options__.functional) {console.error("[vue-loader] Message.vue: functional components are not supported and should be defined in plain js files using render functions.")}
 
 module.exports = __vue_exports__
 
 
 /***/ }),
-/* 175 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18579,19 +18620,27 @@ exports.default = {
 };
 
 /***/ }),
-/* 176 */
-/***/ (function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('h1', [_vm._v("Messages")]), _vm._v(" "), _c('h2', [_vm._v(_vm._s(_vm.message.title))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.message.text))])])
-},staticRenderFns: []}
-
-/***/ }),
 /* 177 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_vm._l((_vm.messages), function(msg, index) {
+  return _c('div', {
+    staticClass: "message"
+  }, [_c('p', {
+    staticClass: "title"
+  }, [_vm._v(_vm._s(_vm.message.title))]), _c('p', {
+    staticClass: "text"
+  }, [_vm._v(_vm._s(_vm.message.text))])])
+},staticRenderFns: []}
+
+/***/ }),
+/* 178 */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "messages"
+  }, [_c('h1', [_vm._v("Messages")]), _vm._v(" "), _vm._l((_vm.messages), function(msg, index) {
     return _c('Message', {
       key: index,
       attrs: {
@@ -18599,6 +18648,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     })
   }), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-default",
     on: {
       "click": function($event) {
         _vm.fetchMessages(_vm.lastFetchedMessageDate)

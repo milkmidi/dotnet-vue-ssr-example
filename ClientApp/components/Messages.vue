@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div class="messages">
+    <h1>Messages</h1>
     <Message v-for="(msg, index) in messages" :message="msg" :key="index" />
-    <button @click="fetchMessages(lastFetchedMessageDate)">Fetch a message</button>
+    <button class="btn btn-default" @click="fetchMessages(lastFetchedMessageDate)">Fetch a message</button>
   </div>
 </template>
 
@@ -15,8 +16,16 @@ export default {
   },
   computed: mapGetters(['messages', 'lastFetchedMessageDate']),
   methods: mapActions(['fetchMessages']),
+  mounted(){
+  },
   components: { 
     Message 
   },
 }
 </script>
+
+<style scoped>
+h1{
+  font-size: 50px;
+}
+</style>

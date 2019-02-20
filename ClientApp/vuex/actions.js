@@ -1,7 +1,12 @@
-import axios from 'axios'
+import axios from 'axios';
+
+var axiosInstance = axios.create({
+  baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'https://node.medialand.tw/' ,
+});
 
 export const fetchInitialMessages = ({ commit }) => {
-  return axios.get('/initialMessages').then(response => {
+  // axios issus ? , need full-URI
+  return axiosInstance.get('/api/initialMessages').then(response => {
     commit("INITIAL_MESSAGES", response.data);
   }).catch(err => {
     console.log(err);
@@ -9,7 +14,7 @@ export const fetchInitialMessages = ({ commit }) => {
 }
 
 export const fetchMessages = ({ commit }, lastFetchedMessageDate) => {
-  axios.get('/fetchMessages?lastFetchedMessageDate=' + lastFetchedMessageDate).then(response => {
+  axiosInstance.get('/api/fetchMessages?lastFetchedMessageDate=' + lastFetchedMessageDate).then(response => {
     commit("FETCH_MESSAGES", response.data);
   }).catch(err => {
     console.log(err);

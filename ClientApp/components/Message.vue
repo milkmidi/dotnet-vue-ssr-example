@@ -5,16 +5,21 @@
 </script>
 
 <template>
-  <div>
-    <h1>Messages</h1>
-    <h2>{{ message.title }}</h2>
-    <p>{{ message.text }}</p>
+  <div class="message">
+    <p class="title">{{ message.title }}</h2>
+    <p class="text">{{ message.text }}</p>
   </div>
 </template>
 
 <style scoped>
-h1{
-  color:green;
+.message{
+  border: 1px solid black;
+}
+.title{
+  font-size: 20px
+}
+.text{
+  font-size: 16px
 }
 </style>
 

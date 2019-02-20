@@ -1,12 +1,15 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import { fetchInitialMessages, fetchMessages } from './actions'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import { fetchInitialMessages, fetchMessages } from './actions';
 import minBy from 'lodash/minBy';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 const store = new Vuex.Store({
-  state: { messages: [], lastFetchedMessageDate: -1 },
+  state: { 
+    messages: [], 
+    lastFetchedMessageDate: -1 
+  },
 
   mutations: {
     INITIAL_MESSAGES: (state, payload) => {

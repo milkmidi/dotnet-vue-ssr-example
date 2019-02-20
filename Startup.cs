@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.SpaServices.Webpack;
+using Microsoft.AspNetCore.HttpOverrides;
+using System.Diagnostics;
+
 namespace dotnet_example {
   public class Startup {
     public Startup(IHostingEnvironment env) {
@@ -27,11 +30,17 @@ namespace dotnet_example {
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services) {
       services.AddMvc();
+
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
       Console.Write("Press any key to continue...");
+      Console.Write("env" + env.IsDevelopment());
+      app.UseForwardedHeaders(new ForwardedHeadersOptions {
+        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+      });
+      app.UseAuthentication();
       if (env.IsDevelopment()) {
         app.UseDeveloperExceptionPage();
         app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
@@ -43,12 +52,6 @@ namespace dotnet_example {
 
       app.UseStaticFiles();
 
-      /* app.UseMvc(routes =>
-      {
-          routes.MapRoute(
-              name: "default",
-              template: "{controller=Home}/{action=Index}/{id?}");
-      }); */
       app.UseMvc(routes => {
         routes.MapRoute(
             name: "default",

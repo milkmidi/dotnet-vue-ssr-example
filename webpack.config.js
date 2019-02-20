@@ -1,10 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const DEV_MODE = process.env.NODE_ENV === 'development';
 module.exports = (env) => {
-  const isDevBuild = !(env && env.prod);
-
+  console.log('DEV_MODE', DEV_MODE);
   const sharedConfig = () => ({
     stats: { modules: false },
     resolve: { extensions: ['.js', '.vue'] },
@@ -29,14 +29,24 @@ module.exports = (env) => {
           loader: "style-loader!css-loader" 
         }
       ]
-    }
+    },
+    plugins:[
+      new webpack.DefinePlugin({
+        'process.env':{
+          'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+        }
+      }),
+      ...DEV_MODE ? [] : [
+        new UglifyJsPlugin()
+      ]
+    ]
   });
 
   const clientBundleOutputDir = './wwwroot/dist';
   const clientBundleConfig = merge(sharedConfig(), {
     entry: { 'main-client': './ClientApp/client.js' },
     output: {
-        path: path.join(__dirname, clientBundleOutputDir)
+      path: path.join(__dirname, clientBundleOutputDir)
     }
   });
 
@@ -52,7 +62,7 @@ module.exports = (env) => {
         {
           test: /\.json?$/,
           loader: 'json-loader'
-          }
+        }
       ]
     },
   });
